@@ -1,0 +1,24 @@
+[
+  {
+    "id": 9,
+    "name": "qwerty",
+    "address": "qwerty",
+    "products": [
+      {
+        "id": 37,
+        "name": "apple",
+        "quantity": 55,
+        "store": {
+          "id": 9,
+          "name": "qwerty"
+        },
+        "categories": [
+          {
+            "categoryItem": "FOOD_PRODUCTS"
+          }
+        ],
+        "price": 55.0
+      }
+    ]
+  }
+]
