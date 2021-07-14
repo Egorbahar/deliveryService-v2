@@ -1,10 +1,11 @@
 package com.exposit.dao.impl;
 
 import com.exposit.dao.ProductDao;
-import com.exposit.model.Product;
 import com.exposit.factory.JsonParserFactory;
 import com.exposit.factory.ParserFactory;
 import com.exposit.factory.Worker;
+import com.exposit.model.Product;
+import com.exposit.model.Store;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class ProductDaoImpl implements ProductDao {
         return getAll().stream()
                        .filter(p -> p.getId().equals(id))
                        .findFirst()
-                       .orElse(null);
+                       .orElseThrow(() -> new IllegalArgumentException("The product was not found with the product id:" + id));
     }
 
     public List<Product> getAll() {
@@ -49,8 +50,15 @@ public class ProductDaoImpl implements ProductDao {
     public void deleteAllByStoreId(Long id) {
         List<Product> products = getAll();
         if (!products.isEmpty() && products != null) {
+            List<Store> stores = products.stream()
+                                         .flatMap(p -> p.getStores().stream())
+                                         .collect(Collectors.toList());
+            Store findStore = stores.stream()
+                                .filter(s -> s.getId().equals(id))
+                                .findFirst()
+                                .get();
             List<Product> filteredProducts = products.stream()
-                                                     .filter(p -> !p.getStore().getId().equals(id))
+                                                     .filter(p -> !p.getStores().contains(findStore))
                                                      .collect(Collectors.toList());
             writeFile(filteredProducts);
         }
@@ -66,8 +74,15 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getAllByStoreId(Long storeId) {
+        List<Store> stores = getAll().stream()
+                                     .flatMap(p -> p.getStores().stream())
+                                     .collect(Collectors.toList());
+        Store findStore = stores.stream()
+                                .filter(s -> s.getId().equals(storeId))
+                                .findFirst()
+                                .get();
         return getAll().stream()
-                       .filter(p -> p.getStore().getId().equals(storeId))
+                       .filter(p -> p.getStores().contains(findStore))
                        .collect(Collectors.toList());
     }
 

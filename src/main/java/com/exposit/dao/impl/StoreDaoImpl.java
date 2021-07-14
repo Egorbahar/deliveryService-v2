@@ -22,7 +22,9 @@ public class StoreDaoImpl implements StoreDao {
 
     public Store getById(Long id) {
         return getAll().stream()
-                       .filter(s -> s.getId().equals(id)).findFirst().orElse(null);//написать exp
+                       .filter(s -> s.getId().equals(id))
+                       .findFirst()
+                       .orElseThrow(()->new IllegalArgumentException("The store was not found with the store id:"+ id));
     }
 
     public List<Store> getAll() {

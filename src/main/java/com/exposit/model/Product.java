@@ -9,16 +9,16 @@ public class Product {
     private Long id;
     private String name;
     private Integer quantity;
-    private Store store;
+    private List<Store> stores;
     private List<Category> categories;
     private Double price;
 
-    public Product(String name, Integer quantity, List<Category> categories, Double price, Store store) {
+    public Product(String name, Integer quantity, List<Category> categories, Double price, List<Store> stores) {
         this.name = name;
         this.quantity = quantity;
         this.categories = categories;
         this.price = price;
-        this.store = store;
+        this.stores = stores;
     }
 
     public Product(Long id) {
