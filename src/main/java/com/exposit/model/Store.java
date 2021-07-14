@@ -1,5 +1,6 @@
 package com.exposit.model;
 
+
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ public class Store {
     private String name;
     private String address;
     private List<Product> products;
+
+    public Store() {
+    }
 
     public Store(String name, String address) {
         this.name = name;

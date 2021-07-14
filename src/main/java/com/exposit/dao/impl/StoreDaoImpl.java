@@ -1,19 +1,15 @@
 package com.exposit.dao.impl;
 
 import com.exposit.dao.StoreDao;
+import com.exposit.factory.JsonParserFactory;
 import com.exposit.model.Store;
-import com.exposit.util.PropertyReader;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.exposit.factory.ParserFactory;
+import com.exposit.factory.Worker;
+import com.exposit.factory.XmlParserFactory;
 
-import java.io.*;
-import java.lang.reflect.Type;
 import java.util.List;
 
 public class StoreDaoImpl implements StoreDao {
-
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public void save(Store store) {
         if (store.getId() == null) {
@@ -30,18 +26,12 @@ public class StoreDaoImpl implements StoreDao {
     }
 
     public List<Store> getAll() {
-        List<Store> stores;
-        BufferedReader bufferedReader = null;
-        try {
-            String absolutePath = new File("").getAbsolutePath();
-            bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue("STORE_FILE")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        Type type = new TypeToken<List<Store>>() {
-        }.getType();
-        stores = gson.fromJson(bufferedReader, type);
-        return stores;
+        ParserFactory parserFactory = new JsonParserFactory();
+        Worker worker = parserFactory.createWorker();
+        return worker.read("STORE_FILE");
+//        ParserFactory parserFactory = new XmlParserFactory();
+//        Worker worker = parserFactory.createWorker();
+//        return worker.read("STORE_XML_FILE");
     }
 
     public void delete(Long id) {
@@ -63,12 +53,14 @@ public class StoreDaoImpl implements StoreDao {
     }
 
     public void writeFile(List<Store> list) {
-        String absolutePath = new File("").getAbsolutePath();
-        try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue("STORE_FILE"))) {
-            gson.toJson(list, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ParserFactory parserFactory = new JsonParserFactory();
+        Worker worker = parserFactory.createWorker();
+        worker.write("STORE_FILE",list);
+//        ParserFactory parserFactory = new XmlParserFactory();
+//        Worker worker = parserFactory.createWorker();
+//        worker.write("STORE_XML_FILE",list);
+
+
     }
 
 }

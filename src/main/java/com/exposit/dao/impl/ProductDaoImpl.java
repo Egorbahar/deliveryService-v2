@@ -2,22 +2,14 @@ package com.exposit.dao.impl;
 
 import com.exposit.dao.ProductDao;
 import com.exposit.model.Product;
-import com.exposit.model.Store;
-import com.exposit.util.PropertyReader;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.exposit.factory.JsonParserFactory;
+import com.exposit.factory.ParserFactory;
+import com.exposit.factory.Worker;
 
-import java.io.*;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoImpl implements ProductDao {
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().setExclusionStrategies(new ExclusionForProduct()).create();
 
     public Product save(Product product) {
         if (product.getId() == null) {
@@ -37,18 +29,9 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     public List<Product> getAll() {
-        List<Product> products = new ArrayList<>();
-        BufferedReader bufferedReader = null;
-        try {
-            String absolutePath = new File("").getAbsolutePath();
-            bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue("PRODUCT_FILE")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        Type type = new TypeToken<List<Product>>() {
-        }.getType();
-        products = gson.fromJson(bufferedReader, type);
-        return products;
+        ParserFactory parserFactory = new JsonParserFactory();
+        Worker worker = parserFactory.createWorker();
+        return worker.read("PRODUCT_FILE");
     }
 
     public Product delete(Product product) {
@@ -89,26 +72,8 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     public void writeFile(List<Product> list) {
-        String absolutePath = new File("").getAbsolutePath();
-        try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue("PRODUCT_FILE"))) {
-            gson.toJson(list, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ParserFactory parserFactory = new JsonParserFactory();
+        Worker worker = parserFactory.createWorker();
+        worker.write("PRODUCT_FILE", list);
     }
-
-    static class ExclusionForProduct implements ExclusionStrategy {
-        @Override
-        public boolean shouldSkipField(FieldAttributes fieldAttributes) {
-            return (fieldAttributes.getDeclaringClass() == Store.class && fieldAttributes.getName().equals("address"))
-                    || (fieldAttributes.getDeclaringClass() == Store.class && fieldAttributes.getName().equals("products"));
-        }
-
-        @Override
-        public boolean shouldSkipClass(Class<?> aClass) {
-            return false;
-        }
-    }
-
-
 }
