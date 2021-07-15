@@ -1,9 +1,7 @@
 package com.exposit.dao.impl;
 
 import com.exposit.dao.ProductDao;
-import com.exposit.factory.JsonParserFactory;
-import com.exposit.factory.ParserFactory;
-import com.exposit.factory.Worker;
+import com.exposit.factorymethod.ParserFactory;
 import com.exposit.model.Product;
 import com.exposit.model.Store;
 
@@ -30,9 +28,8 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     public List<Product> getAll() {
-        ParserFactory parserFactory = new JsonParserFactory();
-        Worker worker = parserFactory.createWorker();
-        return worker.read("PRODUCT_FILE");
+        ParserFactory parserFactory = new ParserFactory();
+        return parserFactory.getParser().read("product");
     }
 
     public Product delete(Product product) {
@@ -87,8 +84,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     public void writeFile(List<Product> list) {
-        ParserFactory parserFactory = new JsonParserFactory();
-        Worker worker = parserFactory.createWorker();
-        worker.write("PRODUCT_FILE", list);
+        ParserFactory parserFactory = new ParserFactory();
+        parserFactory.getParser().write("product",list);
     }
 }

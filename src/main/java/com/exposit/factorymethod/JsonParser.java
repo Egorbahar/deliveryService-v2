@@ -1,4 +1,4 @@
-package com.exposit.factory;
+package com.exposit.factorymethod;
 
 import com.exposit.util.PropertyReader;
 import com.google.gson.Gson;
@@ -9,13 +9,14 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class JsonWorker<T> implements Worker<T> {
+public class JsonParser<T> implements Parser<T> {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
-    public void write(String propertyName, List<T> list) {
+    public void write(String className, List<T> list) {
         String absolutePath = new File("").getAbsolutePath();
-        try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue(propertyName))) {
+        String propertyValue = className + ".file.json";
+        try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue(propertyValue))) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -23,12 +24,13 @@ public class JsonWorker<T> implements Worker<T> {
     }
 
     @Override
-    public List<T> read(String propertyName) {
+    public List<T> read(String className) {
         List<T> list;
         BufferedReader bufferedReader = null;
+        String propertyValue = className + ".file.json";
         try {
             String absolutePath = new File("").getAbsolutePath();
-            bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue(propertyName)));
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue(propertyValue)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

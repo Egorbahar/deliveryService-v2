@@ -40,9 +40,15 @@
     "products": []
   },
   {
-    "id": 79,
+    "id": 79.0,
     "name": "oleg",
     "address": "oleg",
+    "products": []
+  },
+  {
+    "id": 53,
+    "name": "qwert",
+    "address": "qwert",
     "products": []
   }
 ]

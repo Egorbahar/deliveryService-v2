@@ -1,11 +1,8 @@
 package com.exposit.dao.impl;
 
 import com.exposit.dao.StoreDao;
-import com.exposit.factory.JsonParserFactory;
+import com.exposit.factorymethod.ParserFactory;
 import com.exposit.model.Store;
-import com.exposit.factory.ParserFactory;
-import com.exposit.factory.Worker;
-import com.exposit.factory.XmlParserFactory;
 
 import java.util.List;
 
@@ -24,16 +21,12 @@ public class StoreDaoImpl implements StoreDao {
         return getAll().stream()
                        .filter(s -> s.getId().equals(id))
                        .findFirst()
-                       .orElseThrow(()->new IllegalArgumentException("The store was not found with the store id:"+ id));
+                       .orElseThrow(() -> new IllegalArgumentException("The store was not found with the store id:" + id));
     }
 
     public List<Store> getAll() {
-        ParserFactory parserFactory = new JsonParserFactory();
-        Worker worker = parserFactory.createWorker();
-        return worker.read("STORE_FILE");
-//        ParserFactory parserFactory = new XmlParserFactory();
-//        Worker worker = parserFactory.createWorker();
-//        return worker.read("STORE_XML_FILE");
+        ParserFactory parserFactory = new ParserFactory();
+        return parserFactory.getParser().read("store");
     }
 
     public void delete(Long id) {
@@ -55,12 +48,8 @@ public class StoreDaoImpl implements StoreDao {
     }
 
     public void writeFile(List<Store> list) {
-        ParserFactory parserFactory = new JsonParserFactory();
-        Worker worker = parserFactory.createWorker();
-        worker.write("STORE_FILE",list);
-//        ParserFactory parserFactory = new XmlParserFactory();
-//        Worker worker = parserFactory.createWorker();
-//        worker.write("STORE_XML_FILE",list);
+        ParserFactory parserFactory = new ParserFactory();
+        parserFactory.getParser().write("store", list);
 
 
     }

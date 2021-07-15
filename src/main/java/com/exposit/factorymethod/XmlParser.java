@@ -1,4 +1,4 @@
-package com.exposit.factory;
+package com.exposit.factorymethod;
 
 import com.exposit.util.PropertyReader;
 import lombok.SneakyThrows;
@@ -9,18 +9,17 @@ import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.List;
 
-public class XmlWorker<T> implements Worker<T> {
-
-
+public class XmlParser<T> implements Parser<T> {
     @SneakyThrows
     @Override
-    public void write(String propertyName, List<T> list) {
+    public void write(String className, List<T> list) {
+        String propertyValue = className + ".file.xml";
         String absolutePath = new File("").getAbsolutePath();
-        FileOutputStream fos = new FileOutputStream(absolutePath + new PropertyReader().getPropertyValue(propertyName));
+        FileOutputStream fos = new FileOutputStream(absolutePath + new PropertyReader().getPropertyValue(propertyValue));
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener(new ExceptionListener() {
             public void exceptionThrown(Exception e) {
-                System.out.println("Exception! :"+e.toString());
+                System.out.println("Exception! :" + e.toString());
             }
         });
         encoder.writeObject(list);
@@ -28,13 +27,13 @@ public class XmlWorker<T> implements Worker<T> {
         fos.close();
     }
 
-
     @Override
-    public List<T> read(String propertyName){
+    public List<T> read(String className) {
         String absolutePath = new File("").getAbsolutePath();
         FileInputStream fis = null;
+        String propertyValue = className + ".file.xml";
         try {
-            fis = new FileInputStream(absolutePath + new PropertyReader().getPropertyValue(propertyName));
+            fis = new FileInputStream(absolutePath + new PropertyReader().getPropertyValue(propertyValue));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -49,6 +48,3 @@ public class XmlWorker<T> implements Worker<T> {
         return decoded;
     }
 }
-
-
-
