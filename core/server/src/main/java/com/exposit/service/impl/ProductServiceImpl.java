@@ -1,12 +1,10 @@
 package com.exposit.service.impl;
 
 import com.exposit.dao.ProductDao;
-import com.exposit.enums.CategoryItem;
 import com.exposit.model.Category;
 import com.exposit.model.Product;
 import com.exposit.service.ProductService;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -39,7 +37,6 @@ public class ProductServiceImpl implements ProductService {
                          .stream()
                          .filter(p -> filterIfContainsAttribute(attributes, 1, Product::getName).test(p))
                          .filter(p -> filterIfContainsAttribute(attributes, 2, Product::valueOfPrice).test(p))
-                         .filter(p -> filterIfContainsAttribute(attributes, 3, pr -> pr.getStore().getName()).test(p))
                          .collect(Collectors.toList());
     }
 
@@ -76,20 +73,22 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findByCategories(List<Integer> categories) {
-        return productDao.getAll().stream()
-                         .filter(product -> product.getCategories()
-                                                   .stream()
-                                                   .map(Category::getCategoryItem)
-                                                   .map(CategoryItem::getIndex)
-                                                   .collect(Collectors.toList())
-                                                   .containsAll(categories))
-                         .collect(Collectors.toList());
+//        return productDao.getAll().stream()
+//                         .filter(product -> product.getCategories()
+//                                                   .stream()
+//                                                   .map(Category::getCategoryItem)
+//                                                   .map(CategoryItem::getIndex)
+//                                                   .collect(Collectors.toList())
+//                                                   .containsAll(categories))
+//                         .collect(Collectors.toList());
+        return null;
     }
 
     public List<Product> sortByPrice(Long storeId) {
-        return productDao.getAll().stream()
-                         .filter(product -> product.getStore().getId().equals(storeId))
-                         .sorted(Comparator.comparing(Product::getPrice))
-                         .collect(Collectors.toList());
+//        return productDao.getAll().stream()
+//                         .filter(product -> product.getStore().getId().equals(storeId))
+//                         .sorted(Comparator.comparing(Product::getPrice))
+//                         .collect(Collectors.toList());
+        return null;
     }
 }

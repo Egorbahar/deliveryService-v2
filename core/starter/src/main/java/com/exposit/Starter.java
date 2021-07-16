@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Starter {
     protected static final StoreDao storeDao = new StoreDaoImpl();
     protected static final StoreService storeService = new StoreServiceImpl(storeDao);
+
     public static void main(String[] args) {
         System.out.println("Enter the name of store:");
         Scanner scanner = new Scanner(System.in);

@@ -13,9 +13,6 @@ public class Store {
     private String address;
     private List<Product> products;
 
-    public Store() {
-    }
-
     public Store(String name, String address) {
         this.name = name;
         this.address = address;
