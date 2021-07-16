@@ -14,7 +14,7 @@ public class XmlParser<T> implements Parser<T> {
     @Override
     public void write(String className, List<T> list) {
         String propertyValue = className + ".file.xml";
-        String absolutePath = new File("ModuleLogic/").getAbsolutePath();
+        String absolutePath = new File("").getAbsolutePath();
         FileOutputStream fos = new FileOutputStream(absolutePath + new PropertyReader().getPropertyValue(propertyValue));
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener(new ExceptionListener() {
@@ -29,7 +29,7 @@ public class XmlParser<T> implements Parser<T> {
 
     @Override
     public List<T> read(String className) {
-        String absolutePath = new File("ModuleLogic/").getAbsolutePath();
+        String absolutePath = new File("").getAbsolutePath();
         FileInputStream fis = null;
         String propertyValue = className + ".file.xml";
         try {

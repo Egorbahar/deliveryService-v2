@@ -4,13 +4,13 @@
   <void method="add">
    <object class="com.exposit.model.Store">
     <void property="address">
-     <string>hhh</string>
+     <string>gh</string>
     </void>
     <void property="id">
-     <long>55</long>
+     <long>38</long>
     </void>
     <void property="name">
-     <string>hhh</string>
+     <string>gh</string>
     </void>
     <void property="products">
      <object class="java.util.ArrayList"/>
@@ -20,13 +20,13 @@
   <void method="add">
    <object class="com.exposit.model.Store">
     <void property="address">
-     <string>rrr</string>
+     <string>3</string>
     </void>
     <void property="id">
-     <long>6</long>
+     <long>90</long>
     </void>
     <void property="name">
-     <string>rrr</string>
+     <string>3</string>
     </void>
     <void property="products">
      <object class="java.util.ArrayList"/>
