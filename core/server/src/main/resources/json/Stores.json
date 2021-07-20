@@ -1,0 +1,84 @@
+[
+  {
+    "id": 9.0,
+    "name": "qwerty",
+    "address": "qwerty",
+    "products": [
+      {
+        "id": 37.0,
+        "name": "apple",
+        "quantity": 55.0,
+        "store": {
+          "id": 9.0,
+          "name": "qwerty"
+        },
+        "categories": [
+          {
+            "categoryItem": "FOOD_PRODUCTS"
+          }
+        ],
+        "price": 55.0
+      }
+    ]
+  },
+  {
+    "id": 1.0,
+    "name": "qwerty",
+    "address": "qwerty",
+    "products": []
+  },
+  {
+    "id": 47.0,
+    "name": "egor",
+    "address": "egor",
+    "products": []
+  },
+  {
+    "id": 54.0,
+    "name": "nastya",
+    "address": "nastya",
+    "products": []
+  },
+  {
+    "id": 79.0,
+    "name": "oleg",
+    "address": "oleg",
+    "products": []
+  },
+  {
+    "id": 53.0,
+    "name": "qwert",
+    "address": "qwert",
+    "products": []
+  },
+  {
+    "id": 13.0,
+    "name": "yhjk",
+    "address": "ghj",
+    "products": []
+  },
+  {
+    "id": 65.0,
+    "name": "ghj",
+    "address": "ghj",
+    "products": []
+  },
+  {
+    "id": 57.0,
+    "name": "uyt",
+    "address": "uyt",
+    "products": []
+  },
+  {
+    "id": 28.0,
+    "name": "h",
+    "address": "h",
+    "products": []
+  },
+  {
+    "id": 25,
+    "name": "1",
+    "address": "1",
+    "products": []
+  }
+]
