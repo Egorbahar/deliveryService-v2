@@ -1,0 +1,46 @@
+[
+  {
+    "categoryItem": "FOOD_PRODUCTS",
+    "productId": 89
+  },
+  {
+    "categoryItem": "FOOD_PRODUCTS",
+    "productId": 81
+  },
+  {
+    "categoryItem": "SPORTING_GOODS",
+    "productId": 81
+  },
+  {
+    "categoryItem": "FOOD_PRODUCTS",
+    "productId": 95
+  },
+  {
+    "categoryItem": "SPORTING_GOODS",
+    "productId": 95
+  },
+  {
+    "categoryItem": "BUILDING_MATERIALS",
+    "productId": 95
+  },
+  {
+    "categoryItem": "SPORTING_GOODS",
+    "productId": 53
+  },
+  {
+    "categoryItem": "BUILDING_MATERIALS",
+    "productId": 53
+  },
+  {
+    "categoryItem": "SPORTING_GOODS",
+    "productId": 83
+  },
+  {
+    "categoryItem": "SPORTING_GOODS",
+    "productId": 93
+  },
+  {
+    "categoryItem": "FOOD_PRODUCTS",
+    "productId": 37
+  }
+]
