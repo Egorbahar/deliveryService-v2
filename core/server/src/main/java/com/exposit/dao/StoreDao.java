@@ -1,18 +1,19 @@
 package com.exposit.dao;
 
+import com.exposit.exception.FormatFileException;
 import com.exposit.model.Store;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface StoreDao {
-    void save(Store store) throws IOException;
+    void save(Store store) throws IOException, FormatFileException;
 
-    Store getById(Long id);
+    Store getById(Long id) throws FormatFileException, IOException;
 
-    List<Store> getAll();
+    List<Store> getAll() throws FormatFileException, IOException;
 
-    void delete(Long id);
+    void delete(Long id) throws FormatFileException, IOException;
 
-    Store update(Store storeUp);
+    Store update(Store storeUp) throws FormatFileException, IOException;
 }
