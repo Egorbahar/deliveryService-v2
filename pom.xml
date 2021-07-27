@@ -16,6 +16,7 @@
 
     <modules>
         <module>core</module>
+        <module>app</module>
     </modules>
     <build>
         <plugins>
