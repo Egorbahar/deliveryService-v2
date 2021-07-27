@@ -5,6 +5,9 @@ import com.exposit.exception.FormatFileException;
 import com.exposit.model.Category;
 import com.exposit.model.Product;
 import com.exposit.service.ProductService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,13 +16,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
+@Service
+@Transactional
+@AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao;
-
-    public ProductServiceImpl(ProductDao productDao) {
-        this.productDao = productDao;
-    }
 
     public Product addProduct(Product product) throws FormatFileException, IOException {
         return productDao.save(product);

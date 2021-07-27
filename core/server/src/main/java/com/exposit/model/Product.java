@@ -15,12 +15,12 @@ public class Product {
     private List<Category> categories;
     private Double price;
 
-    public Product(String name, Integer quantity, List<Category> categories, Double price, List<Store> stores) {
+    public Product(String name, Integer quantity, Double price) {
         this.name = name;
         this.quantity = quantity;
-        this.categories = categories;
+//        this.categories = categories;
         this.price = price;
-        this.stores = stores;
+//        this.stores = stores;
     }
 
     public Product(Long id) {
