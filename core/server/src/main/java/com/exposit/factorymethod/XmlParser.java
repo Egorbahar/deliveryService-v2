@@ -28,7 +28,7 @@ public class XmlParser<T> implements Parser<T> {
     }
 
     @Override
-    public List<T> read(String className) {
+    public List<T> read(String className) throws IOException {
         String absolutePath = new File("").getAbsolutePath();
         FileInputStream fis = null;
         String propertyValue = className + ".file.xml";

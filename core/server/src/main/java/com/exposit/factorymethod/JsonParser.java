@@ -24,7 +24,7 @@ public class JsonParser<T> implements Parser<T> {
     }
 
     @Override
-    public List<T> read(String className) {
+    public List<T> read(String className) throws IOException {
         List<T> list;
         BufferedReader bufferedReader = null;
         String propertyValue = className + ".file.json";
