@@ -1,17 +1,8 @@
 [
   {
-    "id": 37,
-    "name": "apple",
-    "quantity": 55,
-    "store": {
-      "id": 9,
-      "name": "qwerty"
-    },
-    "categories": [
-      {
-        "categoryItem": "FOOD_PRODUCTS"
-      }
-    ],
-    "price": 55.0
+    "id": 0,
+    "name": "test",
+    "quantity": 0,
+    "price": 0.0
   }
 ]

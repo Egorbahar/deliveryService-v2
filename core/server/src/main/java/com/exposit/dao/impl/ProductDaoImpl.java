@@ -4,11 +4,9 @@ import com.exposit.dao.ProductDao;
 import com.exposit.exception.FormatFileException;
 import com.exposit.factorymethod.ParserFactory;
 import com.exposit.model.Product;
-import com.exposit.model.Store;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductDaoImpl implements ProductDao {
 
@@ -47,20 +45,20 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void deleteAllByStoreId(Long id) throws FormatFileException, IOException {
-        List<Product> products = getAll();
-        if (!products.isEmpty() && products != null) {
-            List<Store> stores = products.stream()
-                                         .flatMap(p -> p.getStores().stream())
-                                         .collect(Collectors.toList());
-            Store findStore = stores.stream()
-                                .filter(s -> s.getId().equals(id))
-                                .findFirst()
-                                .get();
-            List<Product> filteredProducts = products.stream()
-                                                     .filter(p -> !p.getStores().contains(findStore))
-                                                     .collect(Collectors.toList());
-            writeFile(filteredProducts);
-        }
+//        List<Product> products = getAll();
+//        if (!products.isEmpty() && products != null) {
+//            List<Store> stores = products.stream()
+//                                         .flatMap(p -> p.getStores().stream())
+//                                         .collect(Collectors.toList());
+//            Store findStore = stores.stream()
+//                                .filter(s -> s.getId().equals(id))
+//                                .findFirst()
+//                                .get();
+//            List<Product> filteredProducts = products.stream()
+//                                                     .filter(p -> !p.getStores().contains(findStore))
+//                                                     .collect(Collectors.toList());
+//            writeFile(filteredProducts);
+//        }
     }
 
     public Product update(Product productUp) throws FormatFileException, IOException {
@@ -73,16 +71,17 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getAllByStoreId(Long storeId) throws FormatFileException, IOException {
-        List<Store> stores = getAll().stream()
-                                     .flatMap(p -> p.getStores().stream())
-                                     .collect(Collectors.toList());
-        Store findStore = stores.stream()
-                                .filter(s -> s.getId().equals(storeId))
-                                .findFirst()
-                                .get();
-        return getAll().stream()
-                       .filter(p -> p.getStores().contains(findStore))
-                       .collect(Collectors.toList());
+//        List<Store> stores = getAll().stream()
+//                                     .flatMap(p -> p.getStores().stream())
+//                                     .collect(Collectors.toList());
+//        Store findStore = stores.stream()
+//                                .filter(s -> s.getId().equals(storeId))
+//                                .findFirst()
+//                                .get();
+//        return getAll().stream()
+//                       .filter(p -> p.getStores().contains(findStore))
+//                       .collect(Collectors.toList());
+        return null;
     }
 
     public void writeFile(List<Product> list) throws FormatFileException, IOException {

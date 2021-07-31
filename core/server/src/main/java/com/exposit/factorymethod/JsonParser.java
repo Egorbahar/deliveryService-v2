@@ -14,7 +14,7 @@ public class JsonParser<T> implements Parser<T> {
 
     @Override
     public void write(String className, List<T> list) {
-        String absolutePath = new File("").getAbsolutePath();
+        String absolutePath = new File("app/").getAbsolutePath();
         String propertyValue = className + ".file.json";
         try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue(propertyValue))) {
             gson.toJson(list, writer);
@@ -29,7 +29,7 @@ public class JsonParser<T> implements Parser<T> {
         BufferedReader bufferedReader = null;
         String propertyValue = className + ".file.json";
         try {
-            String absolutePath = new File("").getAbsolutePath();
+            String absolutePath = new File("app/").getAbsolutePath();
             bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue(propertyValue)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();

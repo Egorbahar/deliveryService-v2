@@ -9,7 +9,7 @@ public class PropertyReader {
 
     public String getPropertyValue(String propertyName) throws IOException {
         Properties prop = new Properties();
-        String absolutePath = new File("src/main/resources/application.properties").getAbsolutePath();
+        String absolutePath = new File("app/src/main/resources/application.properties").getAbsolutePath();
         try {
             File file = new File(absolutePath);
             prop.load(new FileInputStream(file));

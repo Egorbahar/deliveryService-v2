@@ -3,16 +3,14 @@ package com.exposit.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 public class Product {
     private Long id;
     private String name;
     private Integer quantity;
-    private List<Store> stores;
-    private List<Category> categories;
+//    private List<Store> stores;
+//    private List<Category> categories;
     private Double price;
 
     public Product(String name, Integer quantity, Double price) {

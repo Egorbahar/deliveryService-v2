@@ -48,9 +48,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findByCategory(Category category) throws FormatFileException, IOException {
-        return productDao.getAll().stream()
-                         .filter(product -> product.getCategories().contains(category))
-                         .collect(Collectors.toList());
+//        return productDao.getAll().stream()
+//                         .filter(product -> product.getCategories().contains(category))
+//                         .collect(Collectors.toList());
+        return null;
     }
 
     @Override
