@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
 
-    public Product save(Product product) throws FormatFileException, IOException {
+    public Product save(Product product)  {
         if (product.getId() == null) {
             product.setId((long) (Math.random() * 100));
         }
@@ -20,22 +20,29 @@ public class ProductDaoImpl implements ProductDao {
         return product;
     }
 
-    public Product getById(Long id) throws FormatFileException, IOException {
+    public Product getById(Long id)  {
         return getAll().stream()
                        .filter(p -> p.getId().equals(id))
                        .findFirst()
                        .orElseThrow(() -> new IllegalArgumentException("The product was not found with the product id:" + id));
     }
 
-    public List<Product> getAll() throws FormatFileException, IOException {
+    public List<Product> getAll()  {
         ParserFactory parserFactory = new ParserFactory();
-        return parserFactory.getParser().read("product");
+        try {
+            return parserFactory.getParser().read("product");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FormatFileException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public Product delete(Product product) throws FormatFileException, IOException {
+    public Product delete(Long id){
         List<Product> products = getAll();
         Product deleteProd = products.stream()
-                                     .filter(p -> p.getId().equals(product.getId()))
+                                     .filter(p -> p.getId().equals(id))
                                      .findFirst()
                                      .get();
         products.remove(deleteProd);
@@ -44,7 +51,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void deleteAllByStoreId(Long id) throws FormatFileException, IOException {
+    public void deleteAllByStoreId(Long id) {
 //        List<Product> products = getAll();
 //        if (!products.isEmpty() && products != null) {
 //            List<Store> stores = products.stream()
@@ -61,7 +68,7 @@ public class ProductDaoImpl implements ProductDao {
 //        }
     }
 
-    public Product update(Product productUp) throws FormatFileException, IOException {
+    public Product update(Product productUp){
         Product product = getById(productUp.getId());
         List<Product> updateList = getAll();
         updateList.set(updateList.indexOf(product), productUp);
@@ -70,7 +77,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getAllByStoreId(Long storeId) throws FormatFileException, IOException {
+    public List<Product> getAllByStoreId(Long storeId) {
 //        List<Store> stores = getAll().stream()
 //                                     .flatMap(p -> p.getStores().stream())
 //                                     .collect(Collectors.toList());
@@ -84,8 +91,14 @@ public class ProductDaoImpl implements ProductDao {
         return null;
     }
 
-    public void writeFile(List<Product> list) throws FormatFileException, IOException {
+    public void writeFile(List<Product> list) {
         ParserFactory parserFactory = new ParserFactory();
-        parserFactory.getParser().write("product",list);
+        try {
+            parserFactory.getParser().write("product",list);
+        } catch (FormatFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

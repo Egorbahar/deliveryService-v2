@@ -1,7 +1,6 @@
 package com.exposit.controller;
 
 import com.exposit.dto.ProductDto;
-import com.exposit.exception.FormatFileException;
 import com.exposit.mapper.ProductMapper;
 import com.exposit.model.Product;
 import com.exposit.service.ProductService;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +28,8 @@ public class ProductController {
 
     @PostMapping
     public void save(@Valid @RequestBody ProductDto productDto) {
-        try {
-            Product product = productMapper.toProduct(productDto);
-            productService.addProduct(product);
-        } catch (FormatFileException | IOException e) {
-            e.printStackTrace();
-        }
+        Product product = productMapper.toProduct(productDto);
+        productService.addProduct(product);
     }
 
     @GetMapping

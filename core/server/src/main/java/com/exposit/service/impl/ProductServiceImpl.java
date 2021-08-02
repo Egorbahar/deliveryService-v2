@@ -1,14 +1,12 @@
 package com.exposit.service.impl;
 
 import com.exposit.dao.ProductDao;
-import com.exposit.exception.FormatFileException;
 import com.exposit.model.Category;
 import com.exposit.model.Product;
 import com.exposit.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -20,21 +18,21 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao;
 
-    public Product addProduct(Product product) throws FormatFileException, IOException {
+    public Product addProduct(Product product) {
         return productDao.save(product);
     }
 
-    public Product deleteProduct(Product product) throws FormatFileException, IOException {
-        return productDao.delete(product);
+    public Product delete(Long id) {
+        return productDao.delete(id);
     }
 
     @Override
-    public void updateProduct(Product productUp) throws FormatFileException, IOException {
+    public void updateProduct(Product productUp) {
         productDao.update(productUp);
     }
 
     @Override
-    public List<Product> findByAttributes(Map<Integer, String> attributes) throws FormatFileException, IOException {
+    public List<Product> findByAttributes(Map<Integer, String> attributes) {
         return productDao.getAll()
                          .stream()
                          .filter(p -> filterIfContainsAttribute(attributes, 1, Product::getName).test(p))
@@ -47,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByCategory(Category category) throws FormatFileException, IOException {
+    public List<Product> findByCategory(Category category) {
 //        return productDao.getAll().stream()
 //                         .filter(product -> product.getCategories().contains(category))
 //                         .collect(Collectors.toList());
@@ -55,22 +53,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAll() throws FormatFileException, IOException {
+    public List<Product> getAll() {
         return productDao.getAll();
     }
 
     @Override
-    public List<Product> getAllByStoreId(Long storeId) throws FormatFileException, IOException {
+    public List<Product> getAllByStoreId(Long storeId) {
         return productDao.getAllByStoreId(storeId);
     }
 
     @Override
-    public Product getById(Long id) throws FormatFileException, IOException {
+    public Product getById(Long id) {
         return productDao.getById(id);
     }
 
     @Override
-    public void deleteProductByStoreId(Long storeId) throws FormatFileException, IOException {
+    public void deleteProductByStoreId(Long storeId) {
         productDao.deleteAllByStoreId(storeId);
     }
 
