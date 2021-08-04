@@ -3,46 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>deliveryService-v2</artifactId>
-        <groupId>delivery</groupId>
+        <groupId>com.exposit</groupId>
+        <artifactId>deliveryService</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
+    <artifactId>delivery-core</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
     <modules>
         <module>server</module>
         <module>starter</module>
     </modules>
-    <artifactId>core</artifactId>
-    <groupId>com.exposit</groupId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
-        <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-            <annotationProcessorPaths>
-                <path>
-                    <groupId>org.mapstruct</groupId>
-                    <artifactId>mapstruct-processor</artifactId>
-                    <version>${org.mapstruct.version}</version>
-                </path>
-            </annotationProcessorPaths>
-            <!-- due to problem in maven-compiler-plugin, for verbose mode add showWarnings -->
-            <showWarnings>true</showWarnings>
-            <compilerArgs>
-                <arg>
-                    -Amapstruct.suppressGeneratorTimestamp=true
-                </arg>
-                <arg>
-                    -Amapstruct.suppressGeneratorVersionInfoComment=true
-                </arg>
-                <arg>
-                    -Amapstruct.verbose=true
-                </arg>
-            </compilerArgs>
-        </configuration>
-    </plugin>
 </project>
