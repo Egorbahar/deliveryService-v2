@@ -1,6 +1,6 @@
 package com.exposit.core;
 
-import com.exposit.core.exception.ProductNotFoundException;
+import com.exposit.web.exception.ProductNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

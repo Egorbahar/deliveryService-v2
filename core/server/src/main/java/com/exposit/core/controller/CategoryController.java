@@ -1,10 +1,10 @@
 package com.exposit.core.controller;
 
 import com.exposit.core.dto.CategoryDto;
-import com.exposit.core.exception.FormatFileException;
-import com.exposit.core.mapper.CategoryMapper;
 import com.exposit.core.model.Category;
 import com.exposit.core.service.CategoryService;
+import com.exposit.persistence.mapper.CategoryMapper;
+import com.exposit.web.exception.FormatFileException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<List<CategoryDto>> getAll() {
-        List<CategoryDto> categoryDtoList = categoryMapper.toCategoryDTOs(categoryService.getAll());
+        List<CategoryDto> categoryDtoList = categoryMapper.toCategoryDtoList(categoryService.getAll());
         return new ResponseEntity<List<CategoryDto>>(categoryDtoList, HttpStatus.OK);
     }
 

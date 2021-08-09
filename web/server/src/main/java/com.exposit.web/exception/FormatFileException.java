@@ -1,4 +1,4 @@
-package com.exposit.core.exception;
+package com.exposit.web.exception;
 
 public class FormatFileException extends Exception {
     public FormatFileException(String message) {

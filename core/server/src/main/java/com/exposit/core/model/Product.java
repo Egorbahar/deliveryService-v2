@@ -10,6 +10,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+
 public class Product {
     private Long id;
     @NotNull

@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.exposit.config.StarterConfig,\
-com.exposit.config.SwaggerConfig
+com.exposit.core.SwaggerConfig,\
+com.exposit.core.StarterConfig

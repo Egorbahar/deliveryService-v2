@@ -1,9 +1,9 @@
 package com.exposit.core.dao.impl;
 
 import com.exposit.core.dao.CategoryDao;
-import com.exposit.core.exception.FormatFileException;
 import com.exposit.core.factorymethod.ParserFactory;
 import com.exposit.core.model.Category;
+import com.exposit.web.exception.FormatFileException;
 
 import java.io.IOException;
 import java.util.List;

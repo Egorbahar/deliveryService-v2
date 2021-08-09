@@ -1,7 +1,6 @@
 package com.exposit.core.controller;
 
 import com.exposit.core.dto.ProductDto;
-import com.exposit.core.mapper.ProductMapper;
 import com.exposit.core.model.Product;
 import com.exposit.core.service.ProductService;
 import org.springframework.http.HttpStatus;

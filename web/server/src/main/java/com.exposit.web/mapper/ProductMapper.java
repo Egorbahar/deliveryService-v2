@@ -1,4 +1,4 @@
-package com.exposit.persistence.mapper;
+package com.exposit.web.mapper;
 
 import com.exposit.core.dto.ProductDto;
 import com.exposit.core.model.Product;
@@ -13,7 +13,7 @@ public interface ProductMapper {
 
     ProductDto toProductDto(Product product);
 
-    @BeanMapping()
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
     void updateEntity(@MappingTarget Product product, ProductDto productDto);
 

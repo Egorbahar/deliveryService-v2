@@ -12,6 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = "com.exposit.persistence.repository")
 @EntityScan(basePackages = "com.exposit.persistence.model")
 @EnableTransactionManagement
-@AutoConfigureBefore({ com.exposit.core.StarterConfig.class})
+@AutoConfigureBefore({com.exposit.core.StarterConfig.class})
 public class StarterConfiguration {
 }

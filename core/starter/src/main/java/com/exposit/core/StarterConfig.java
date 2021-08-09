@@ -4,7 +4,6 @@ import com.exposit.core.dao.CategoryDao;
 import com.exposit.core.dao.ProductDao;
 import com.exposit.core.dao.impl.CategoryDaoImpl;
 import com.exposit.core.dao.impl.ProductDaoImpl;
-import com.exposit.core.mapper.CategoryMapper;
 import com.exposit.core.service.CategoryService;
 import com.exposit.core.service.ProductService;
 import com.exposit.core.service.impl.CategoryServiceImpl;
@@ -34,9 +33,9 @@ public class StarterConfig {
     public CategoryDao categoryDao() {
         return new CategoryDaoImpl();
     }
-
-    @Bean
-    public CategoryMapper categoryMapper() {
-        return CategoryMapper.INSTANCE;
-    }
+//
+//    @Bean
+//    public CategoryMapper categoryMapper() {
+//        return CategoryMapper.INSTANCE;
+//    }
 }
