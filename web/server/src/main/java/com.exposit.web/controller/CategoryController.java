@@ -1,10 +1,10 @@
-package com.exposit.core.controller;
+package com.exposit.web.controller;
 
-import com.exposit.core.dto.CategoryDto;
-import com.exposit.core.model.Category;
+import com.exposit.core.exception.FormatFileException;
 import com.exposit.core.service.CategoryService;
-import com.exposit.persistence.mapper.CategoryMapper;
-import com.exposit.web.exception.FormatFileException;
+import com.exposit.persistence.entity.Category;
+import com.exposit.web.dto.CategoryDto;
+import com.exposit.web.mapper.CategoryMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,9 @@
-package com.exposit.core.controller;
+package com.exposit.web.controller;
 
-import com.exposit.core.dto.ProductDto;
-import com.exposit.core.model.Product;
 import com.exposit.core.service.ProductService;
+import com.exposit.persistence.entity.Product;
+import com.exposit.web.dto.ProductDto;
+import com.exposit.web.mapper.ProductMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

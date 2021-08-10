@@ -1,7 +1,7 @@
 package com.exposit.core.factorymethod;
 
+import com.exposit.core.exception.FormatFileException;
 import com.exposit.core.util.PropertyReader;
-import com.exposit.web.exception.FormatFileException;
 
 import java.io.IOException;
 

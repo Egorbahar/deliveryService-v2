@@ -1,9 +1,9 @@
 package com.exposit.core.service.impl;
 
 import com.exposit.core.dao.ProductDao;
-import com.exposit.core.model.Category;
-import com.exposit.core.model.Product;
 import com.exposit.core.service.ProductService;
+import com.exposit.persistence.entity.Category;
+import com.exposit.persistence.entity.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 

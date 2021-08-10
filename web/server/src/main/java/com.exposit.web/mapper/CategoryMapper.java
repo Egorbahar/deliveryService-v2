@@ -1,8 +1,8 @@
 package com.exposit.web.mapper;
 
-import com.exposit.core.dto.CategoryDto;
-import com.exposit.core.dto.ProductDto;
-import com.exposit.core.model.Category;
+import com.exposit.persistence.entity.Category;
+import com.exposit.web.dto.CategoryDto;
+import com.exposit.web.dto.ProductDto;
 import org.mapstruct.*;
 
 import java.util.Collection;

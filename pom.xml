@@ -27,7 +27,7 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <hibernate.version>5.2.1.Final</hibernate.version>
         <c3p0.version>0.9.5.2</c3p0.version>
-        <postgresql.version>9.4.1212.jre7</postgresql.version>
+        <postgresql.version>42.2.1</postgresql.version>
     </properties>
 
     <dependencies>

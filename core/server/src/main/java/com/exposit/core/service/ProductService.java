@@ -1,7 +1,7 @@
 package com.exposit.core.service;
 
-import com.exposit.core.model.Category;
-import com.exposit.core.model.Product;
+import com.exposit.persistence.entity.Category;
+import com.exposit.persistence.entity.Product;
 
 import java.util.List;
 import java.util.Map;

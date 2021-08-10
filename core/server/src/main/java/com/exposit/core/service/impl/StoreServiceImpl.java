@@ -1,9 +1,9 @@
 package com.exposit.core.service.impl;
 
 import com.exposit.core.dao.StoreDao;
-import com.exposit.core.model.Store;
+import com.exposit.core.exception.FormatFileException;
 import com.exposit.core.service.StoreService;
-import com.exposit.web.exception.FormatFileException;
+import com.exposit.persistence.entity.Store;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.exposit.core.dao;
 
-import com.exposit.core.model.Product;
+import com.exposit.persistence.entity.Product;
 
 import java.util.List;
 

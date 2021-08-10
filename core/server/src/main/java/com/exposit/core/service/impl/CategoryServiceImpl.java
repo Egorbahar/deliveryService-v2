@@ -1,9 +1,9 @@
 package com.exposit.core.service.impl;
 
 import com.exposit.core.dao.CategoryDao;
-import com.exposit.core.model.Category;
+import com.exposit.core.exception.FormatFileException;
 import com.exposit.core.service.CategoryService;
-import com.exposit.web.exception.FormatFileException;
+import com.exposit.persistence.entity.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 

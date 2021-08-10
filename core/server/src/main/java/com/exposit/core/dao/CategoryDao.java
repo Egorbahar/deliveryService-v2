@@ -1,7 +1,7 @@
 package com.exposit.core.dao;
 
-import com.exposit.core.model.Category;
-import com.exposit.web.exception.FormatFileException;
+import com.exposit.core.exception.FormatFileException;
+import com.exposit.persistence.entity.Category;
 
 import java.io.IOException;
 

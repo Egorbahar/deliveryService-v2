@@ -1,4 +1,4 @@
-package com.exposit.core.dto;
+package com.exposit.web.dto;
 
 
 import lombok.*;
