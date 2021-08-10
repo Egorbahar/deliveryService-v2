@@ -32,7 +32,11 @@ public class CategoryController {
             e.printStackTrace();
         }
     }
-
+    @GetMapping
+    public String get()
+    {
+        return "test";
+    }
     @GetMapping
     public ResponseEntity<List<CategoryDto>> getAll() {
         List<CategoryDto> categoryDtoList = categoryMapper.toCategoryDtoList(categoryService.getAll());

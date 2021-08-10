@@ -33,9 +33,5 @@ public class StarterConfig {
     public CategoryDao categoryDao() {
         return new CategoryDaoImpl();
     }
-//
-//    @Bean
-//    public CategoryMapper categoryMapper() {
-//        return CategoryMapper.INSTANCE;
-//    }
+
 }
