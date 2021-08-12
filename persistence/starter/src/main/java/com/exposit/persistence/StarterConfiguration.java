@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration("persistenceConfigurationStarter")
-@PropertySource("/database.properties")
+@PropertySource("/database/database.properties")
 @ComponentScan(basePackages = {"com.exposit.persistence"})
 @EnableJpaRepositories(basePackages = "com.exposit.persistence.repository")
 @EntityScan(basePackages = "com.exposit.persistence.entity")

@@ -8,7 +8,7 @@ import org.mapstruct.*;
 import java.util.Collection;
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CategoryMapper {
     Category toCategory(CategoryDto categoryDto);
 

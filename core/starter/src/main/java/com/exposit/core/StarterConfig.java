@@ -8,6 +8,7 @@ import com.exposit.core.service.CategoryService;
 import com.exposit.core.service.ProductService;
 import com.exposit.core.service.impl.CategoryServiceImpl;
 import com.exposit.core.service.impl.ProductServiceImpl;
+import com.exposit.persistence.repository.ProductRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 
 public class StarterConfig {
     @Bean
-    public ProductService productService(ProductDao productDao) {
-        return new ProductServiceImpl(productDao);
+    public ProductService productService(ProductDao productDao, ProductRepository productRepository) {
+        return new ProductServiceImpl(productDao,productRepository);
     }
 
     @Bean

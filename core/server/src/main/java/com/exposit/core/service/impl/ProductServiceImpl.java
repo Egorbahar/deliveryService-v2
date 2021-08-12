@@ -4,6 +4,7 @@ import com.exposit.core.dao.ProductDao;
 import com.exposit.core.service.ProductService;
 import com.exposit.persistence.entity.Category;
 import com.exposit.persistence.entity.Product;
+import com.exposit.persistence.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +18,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao;
+    private final ProductRepository productRepository;
 
     public Product addProduct(Product product) {
-        return productDao.save(product);
+        return productRepository.save(product);
+        //return productDao.save(product);
     }
 
     public Product delete(Long id) {

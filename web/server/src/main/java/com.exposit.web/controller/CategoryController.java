@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -37,11 +36,11 @@ public class CategoryController {
     {
         return "test";
     }
-    @GetMapping
-    public ResponseEntity<List<CategoryDto>> getAll() {
-        List<CategoryDto> categoryDtoList = categoryMapper.toCategoryDtoList(categoryService.getAll());
-        return new ResponseEntity<List<CategoryDto>>(categoryDtoList, HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<CategoryDto>> getAll() {
+//        List<CategoryDto> categoryDtoList = categoryMapper.toCategoryDtoList(categoryService.getAll());
+//        return new ResponseEntity<List<CategoryDto>>(categoryDtoList, HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDto> getById(@PathVariable("id") Long id) {
