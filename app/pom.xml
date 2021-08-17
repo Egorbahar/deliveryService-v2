@@ -37,7 +37,13 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+     <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.1</version>
+        </dependency>
     </dependencies>
-    <packaging>jar</packaging>
 
+
+    <packaging>jar</packaging>
 </project>

@@ -14,10 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column (name = "name")
+    @Column (name = "Name")
     private String name;
     @ManyToOne(cascade={CascadeType.ALL})
     @JoinColumn(name = "parent_category_id")
@@ -30,9 +30,4 @@ public class Category {
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 
-    public Category(String name, List<Category> subCategories, List<Product> products) {
-        this.name = name;
-        this.subCategories = subCategories;
-        this.products = products;
-    }
 }

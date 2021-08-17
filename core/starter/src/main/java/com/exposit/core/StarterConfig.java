@@ -8,16 +8,28 @@ import com.exposit.core.service.CategoryService;
 import com.exposit.core.service.ProductService;
 import com.exposit.core.service.impl.CategoryServiceImpl;
 import com.exposit.core.service.impl.ProductServiceImpl;
+import com.exposit.core.service.implDB.CategoryDataBaseService;
+import com.exposit.core.service.implDB.ProductDataBaseService;
+import com.exposit.persistence.repository.CategoryRepository;
 import com.exposit.persistence.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 @Configuration
-
+@AllArgsConstructor
 public class StarterConfig {
+    private final Environment environment;
+
+
     @Bean
     public ProductService productService(ProductDao productDao, ProductRepository productRepository) {
-        return new ProductServiceImpl(productDao,productRepository);
+        if (environment.getRequiredProperty("datasource.type").equals("JPA")) {
+            return new ProductDataBaseService(productRepository);
+        } else {
+            return new ProductServiceImpl(productDao);
+        }
     }
 
     @Bean
@@ -26,8 +38,12 @@ public class StarterConfig {
     }
 
     @Bean
-    public CategoryService categoryService(CategoryDao categoryDao) {
-        return new CategoryServiceImpl(categoryDao);
+    public CategoryService categoryService(CategoryDao categoryDao, CategoryRepository categoryRepository) {
+        if (environment.getRequiredProperty("datasource.type").equals("JPA")) {
+            return new CategoryDataBaseService(categoryRepository);
+        } else {
+            return new CategoryServiceImpl(categoryDao);
+        }
     }
 
     @Bean

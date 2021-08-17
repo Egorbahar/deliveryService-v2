@@ -1,7 +1,19 @@
 [
   {
-    "id": 0,
+    "id": 0.0,
     "name": "test",
+    "quantity": 0.0,
+    "price": 0.0
+  },
+  {
+    "id": 0.0,
+    "name": "tt",
+    "quantity": 0.0,
+    "price": 0.0
+  },
+  {
+    "id": 0,
+    "name": "ti",
     "quantity": 0,
     "price": 0.0
   }
