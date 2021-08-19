@@ -11,7 +11,7 @@ import java.util.List;
 public class CategoryDaoImpl implements CategoryDao {
 
     @Override
-    public void save(Category category) throws FormatFileException, IOException {
+    public void save(Category category){
         if (category.getId() == null) {
             category.setId((long) (Math.random() * 100));
         }
@@ -20,13 +20,37 @@ public class CategoryDaoImpl implements CategoryDao {
         writeFile(categories);
     }
 
-    public List<Category> getAll() throws FormatFileException, IOException {
-        ParserFactory parserFactory = new ParserFactory();
-        return parserFactory.getParser().read("category");
+    @Override
+    public Category getById(Long id) {
+        return null;
     }
 
-    public void writeFile(List<Category> list) throws FormatFileException, IOException {
+    public List<Category> getAll(){
         ParserFactory parserFactory = new ParserFactory();
-        parserFactory.getParser().write("category",list);
+        try {
+            return parserFactory.getParser().read("category");
+        } catch (IOException | FormatFileException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    @Override
+    public Category update(Category category) {
+        return null;
+    }
+
+    public void writeFile(List<Category> list){
+        ParserFactory parserFactory = new ParserFactory();
+        try {
+            parserFactory.getParser().write("category",list);
+        } catch (FormatFileException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

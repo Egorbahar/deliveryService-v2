@@ -10,30 +10,32 @@ import java.util.List;
 
 @Transactional
 @AllArgsConstructor
-public class CategoryDataBaseService implements CategoryService {
+public class CategoryDatabaseService implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
     public void save(Category category) {
+        categoryRepository.save(category);
     }
 
     @Override
     public List<Category> getAll() {
-        return null;
+        return categoryRepository.findAll();
     }
 
     @Override
-    public Category getById(Long id) {
-        return null;
+    public Category findById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException(""));
     }
 
     @Override
     public void delete(Long id) {
-
+        categoryRepository.deleteById(id);
     }
 
     @Override
-    public void update(Category category) {
-
+    public Category update(Category category) {
+        findById(category.getId());
+        return categoryRepository.saveAndFlush(category);
     }
 }

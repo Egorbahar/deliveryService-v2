@@ -12,9 +12,9 @@ public interface ProductService {
 
     List<Product> sortByPrice(Long storeId);
 
-    Product delete(Long id);
+    void delete(Long id);
 
-    void updateProduct(Product productUp);
+    Product updateProduct(Product productUp);
 
     List<Product> findByAttributes(Map<Integer, String> attributes);
 
@@ -24,7 +24,7 @@ public interface ProductService {
 
     List<Product> getAllByStoreId(Long storeId);
 
-    Product getById(Long id);
+    Product findById(Long id);
 
     void deleteProductByStoreId(Long id);
 

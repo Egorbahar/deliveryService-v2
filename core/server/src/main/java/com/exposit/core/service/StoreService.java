@@ -1,20 +1,18 @@
 package com.exposit.core.service;
 
-import com.exposit.core.exception.FormatFileException;
 import com.exposit.persistence.entity.Store;
 
-import java.io.IOException;
 import java.util.List;
 
 
 public interface StoreService {
-    void add(Store store) throws IOException, FormatFileException;
+    void add(Store store);
 
-    void deleteStore(Long id) throws FormatFileException, IOException;
+    void delete(Long id);
 
-    void updateStore(Store store) throws FormatFileException, IOException;
+    Store update(Store store);
 
-    List<Store> getAll() throws FormatFileException, IOException;
+    List<Store> getAll();
 
-    Store getById(Long id) throws FormatFileException, IOException;
+    Store findById(Long id);
 }

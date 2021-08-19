@@ -23,13 +23,14 @@ public class ProductServiceImpl implements ProductService {
         return productDao.save(product);
     }
 
-    public Product delete(Long id) {
-        return productDao.delete(id);
+    public void delete(Long id) {
+        productDao.delete(id);
     }
 
     @Override
-    public void updateProduct(Product productUp) {
+    public Product updateProduct(Product productUp) {
         productDao.update(productUp);
+        return productUp;
     }
 
     @Override
@@ -64,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getById(Long id) {
+    public Product findById(Long id) {
         return productDao.getById(id);
     }
 

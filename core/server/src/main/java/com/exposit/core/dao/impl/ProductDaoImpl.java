@@ -39,7 +39,7 @@ public class ProductDaoImpl implements ProductDao {
         return null;
     }
 
-    public Product delete(Long id){
+    public void delete(Long id){
         List<Product> products = getAll();
         Product deleteProd = products.stream()
                                      .filter(p -> p.getId().equals(id))
@@ -47,7 +47,6 @@ public class ProductDaoImpl implements ProductDao {
                                      .get();
         products.remove(deleteProd);
         writeFile(products);
-        return deleteProd;
     }
 
     @Override

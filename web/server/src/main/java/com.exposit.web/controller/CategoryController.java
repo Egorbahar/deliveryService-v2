@@ -1,6 +1,5 @@
 package com.exposit.web.controller;
 
-import com.exposit.core.exception.FormatFileException;
 import com.exposit.core.service.CategoryService;
 import com.exposit.persistence.entity.Category;
 import com.exposit.web.dto.CategoryDto;
@@ -11,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,12 +22,8 @@ public class CategoryController {
 
     @PostMapping
     public void save(@Valid @RequestBody CategoryDto categoryDto) {
-        try {
-            Category category = categoryMapper.toCategory(categoryDto);
-            categoryService.save(category);
-        } catch (FormatFileException | IOException e) {
-            e.printStackTrace();
-        }
+        Category category = categoryMapper.toCategory(categoryDto);
+        categoryService.save(category);
     }
     @GetMapping
     public String get()
@@ -44,7 +38,7 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDto> getById(@PathVariable("id") Long id) {
-        CategoryDto categoryDto = categoryMapper.toCategoryDTO(categoryService.getById(id));
+        CategoryDto categoryDto = categoryMapper.toCategoryDTO(categoryService.findById(id));
         return new ResponseEntity<CategoryDto>(categoryDto, HttpStatus.OK);
     }
 

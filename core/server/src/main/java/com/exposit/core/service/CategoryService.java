@@ -10,9 +10,9 @@ public interface CategoryService {
 
     List<Category> getAll();
 
-    Category getById(Long id);
+    Category findById(Long id);
 
     void delete(Long id);
 
-    void update(Category category);
+    Category update(Category category);
 }

@@ -7,6 +7,7 @@ import org.mapstruct.*;
 import java.util.Collection;
 import java.util.List;
 
+@Mapper(componentModel = "spring")
 public interface StoreMapper {
     Store toStore(StoreDto productDto);
 

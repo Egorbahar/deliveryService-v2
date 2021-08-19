@@ -11,7 +11,7 @@ public interface ProductDao {
 
     List<Product> getAll();
 
-    Product delete(Long id);
+    void delete(Long id);
 
     void deleteAllByStoreId(Long id);
 

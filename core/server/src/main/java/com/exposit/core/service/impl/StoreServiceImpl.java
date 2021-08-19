@@ -1,11 +1,9 @@
 package com.exposit.core.service.impl;
 
 import com.exposit.core.dao.StoreDao;
-import com.exposit.core.exception.FormatFileException;
 import com.exposit.core.service.StoreService;
 import com.exposit.persistence.entity.Store;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -17,26 +15,26 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void add(Store store) throws IOException, FormatFileException {
+    public void add(Store store){
         storeDao.save(store);
     }
 
     @Override
-    public void deleteStore(Long id) throws FormatFileException, IOException {
+    public void delete(Long id){
         storeDao.delete(id);
     }
 
     @Override
-    public void updateStore(Store store) throws FormatFileException, IOException {
-        storeDao.update(store);
+    public Store update(Store store){
+        return storeDao.update(store);
     }
 
-    public List<Store> getAll() throws FormatFileException, IOException {
+    public List<Store> getAll(){
         return storeDao.getAll();
     }
 
     @Override
-    public Store getById(Long id) throws FormatFileException, IOException {
+    public Store findById(Long id){
         return storeDao.getById(id);
     }
 }

@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Transactional
 @AllArgsConstructor
-public class ProductDataBaseService implements ProductService {
+public class ProductDatabaseService implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
@@ -26,13 +26,14 @@ public class ProductDataBaseService implements ProductService {
     }
 
     @Override
-    public Product delete(Long id) {
-        return null;
+    public void delete(Long id) {
+         productRepository.deleteById(id);
     }
 
     @Override
-    public void updateProduct(Product productUp) {
-
+    public Product updateProduct(Product productUp) {
+        findById(productUp.getId());
+        return productRepository.saveAndFlush(productUp);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class ProductDataBaseService implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
@@ -56,8 +57,8 @@ public class ProductDataBaseService implements ProductService {
     }
 
     @Override
-    public Product getById(Long id) {
-        return null;
+    public Product findById(Long id) {
+        return productRepository.findById(id).orElseThrow(()-> new RuntimeException(""));
     }
 
     @Override

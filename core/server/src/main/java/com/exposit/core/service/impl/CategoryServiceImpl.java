@@ -1,13 +1,11 @@
 package com.exposit.core.service.impl;
 
 import com.exposit.core.dao.CategoryDao;
-import com.exposit.core.exception.FormatFileException;
 import com.exposit.core.service.CategoryService;
 import com.exposit.persistence.entity.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -17,27 +15,27 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryDao categoryDao;
 
     @Override
-    public void save(Category category) throws FormatFileException, IOException {
+    public void save(Category category){
         categoryDao.save(category);
     }
 
     @Override
     public List<Category> getAll() {
-        return null;
+        return categoryDao.getAll();
     }
 
     @Override
-    public Category getById(Long id) {
-        return null;
+    public Category findById(Long id) {
+        return categoryDao.getById(id);
     }
 
     @Override
     public void delete(Long id) {
-
+        categoryDao.delete(id);
     }
 
     @Override
-    public void update(Category category) {
-
+    public Category update(Category category) {
+        return categoryDao.update(category);
     }
 }
