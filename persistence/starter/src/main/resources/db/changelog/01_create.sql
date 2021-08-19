@@ -7,7 +7,7 @@ CREATE TABLE product(
 CREATE TABLE category(
 	id bigserial primary key,
 	name varchar(30) not null,
-	parent_category_id bigserial,
+	parent_category_id bigint,
 	FOREIGN KEY (parent_category_id) references category(id)
 );
 CREATE TABLE store(

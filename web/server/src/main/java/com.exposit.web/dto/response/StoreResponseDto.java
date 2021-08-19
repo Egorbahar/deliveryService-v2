@@ -1,5 +1,4 @@
-package com.exposit.web.dto;
-
+package com.exposit.web.dto.response;
 
 import lombok.*;
 
@@ -8,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StoreDto {
+public class StoreResponseDto {
     private Long id;
     private String name;
     private String address;

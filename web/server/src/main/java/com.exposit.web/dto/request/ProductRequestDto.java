@@ -1,4 +1,4 @@
-package com.exposit.web.dto;
+package com.exposit.web.dto.request;
 
 import lombok.*;
 
@@ -9,9 +9,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CategoryDto {
-
-    private Long id;
+public class ProductRequestDto {
     @NotNull
     private String name;
+    @NotNull
+    private String quantity;
+    @NotNull
+    private String price;
+
 }

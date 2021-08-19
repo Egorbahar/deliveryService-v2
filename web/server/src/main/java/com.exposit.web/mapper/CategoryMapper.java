@@ -1,8 +1,9 @@
 package com.exposit.web.mapper;
 
 import com.exposit.persistence.entity.Category;
-import com.exposit.web.dto.CategoryDto;
-import com.exposit.web.dto.ProductDto;
+import com.exposit.web.dto.request.CategoryRequestDto;
+import com.exposit.web.dto.request.ProductRequestDto;
+import com.exposit.web.dto.response.CategoryResponseDto;
 import org.mapstruct.*;
 
 import java.util.Collection;
@@ -10,13 +11,13 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
-    Category toCategory(CategoryDto categoryDto);
+    Category toCategory(CategoryRequestDto categoryRequestDto);
 
-    CategoryDto toCategoryDTO(Category category);
+    CategoryResponseDto toCategoryResponseDto(Category category);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
-    void updateEntity(@MappingTarget Category category, CategoryDto categoryDto);
-    @IterableMapping(elementTargetType = ProductDto.class)
-    List<CategoryDto> toCategoryDtoList(Collection<Category> categories);
+    void updateEntity(@MappingTarget Category category, CategoryRequestDto categoryDto);
+    @IterableMapping(elementTargetType = ProductRequestDto.class)
+    List<CategoryResponseDto> toCategoryResponseDtoList(Collection<Category> categories);
 }
