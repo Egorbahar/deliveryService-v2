@@ -13,4 +13,5 @@ public class CategoryResponseDto {
     private Long id;
     @NotNull
     private String name;
+    private Long parent_category_id;
 }

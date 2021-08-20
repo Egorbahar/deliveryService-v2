@@ -12,4 +12,5 @@ import javax.validation.constraints.NotNull;
 public class CategoryRequestDto {
     @NotNull
     private String name;
+    private Long parent_category_id;
 }

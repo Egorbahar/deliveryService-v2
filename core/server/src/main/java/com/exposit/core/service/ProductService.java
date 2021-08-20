@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public interface ProductService {
-    Product addProduct(Product product);
+    Product saveProduct(Product product);
 
     List<Product> sortByPrice(Long storeId);
 

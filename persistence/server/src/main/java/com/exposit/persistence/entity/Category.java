@@ -19,11 +19,12 @@ public class Category {
     private Long id;
     @Column (name = "Name")
     private String name;
-    @ManyToOne(cascade={CascadeType.ALL})
+    @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name = "parent_category_id")
     private Category parent;
     @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
     private List<Category> subCategories;
+
     @ManyToMany
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "category_id"),

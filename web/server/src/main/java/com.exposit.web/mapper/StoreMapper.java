@@ -10,14 +10,15 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface StoreMapper {
-    Store toStore(StoreRequestDto storeRequestDto);
-
     StoreResponseDto toStoreResponseDto(Store store);
+
+    @Mapping(target = "id", ignore = true)
+    Store toStore(StoreRequestDto storeRequestDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
     void updateEntity(@MappingTarget Store store, StoreRequestDto storeDto);
 
-    @IterableMapping(elementTargetType = StoreRequestDto.class)
+    @IterableMapping(elementTargetType = StoreResponseDto.class)
     List<StoreResponseDto> toStoreResponseDtoList(Collection<Store> stores);
 }

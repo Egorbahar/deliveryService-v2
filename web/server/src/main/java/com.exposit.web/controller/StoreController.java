@@ -1,6 +1,8 @@
 package com.exposit.web.controller;
 
+import com.exposit.core.service.ProductService;
 import com.exposit.core.service.StoreService;
+import com.exposit.persistence.entity.Product;
 import com.exposit.persistence.entity.Store;
 import com.exposit.web.dto.request.StoreRequestDto;
 import com.exposit.web.dto.response.StoreResponseDto;
@@ -19,6 +21,7 @@ import java.util.List;
 public class StoreController {
     private final StoreMapper storeMapper;
     private final StoreService storeService;
+    private final ProductService productService;
 
     @PostMapping
     public void save(@Valid @RequestBody StoreRequestDto storeRequestDto) {
@@ -52,4 +55,14 @@ public class StoreController {
         StoreResponseDto storeResponseDto = storeMapper.toStoreResponseDto(store);
         return new ResponseEntity<>(storeResponseDto, HttpStatus.OK);
     }
+
+    @PostMapping("{id}/products")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void addProductToStore(@PathVariable("id") Long storeId, @Valid @RequestParam Long prodId) {
+        Product product = productService.findById(prodId);
+        Store store = storeService.findById(storeId);
+        store.getProducts().add(product);
+        storeService.update(store);
+    }
+
 }

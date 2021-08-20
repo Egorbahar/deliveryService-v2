@@ -23,6 +23,7 @@ public class Product {
     private Integer quantity;
     @Column(name = "price")
     private Double price;
+
     @ManyToMany
     @JoinTable(name = "product_store",
             joinColumns = @JoinColumn(name = "product_id"),

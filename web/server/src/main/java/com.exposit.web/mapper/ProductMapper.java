@@ -8,17 +8,19 @@ import org.mapstruct.*;
 import java.util.Collection;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = CategoryMapper.class)
 public interface ProductMapper {
-    Product toProduct(ProductRequestDto productRequestDto);
 
     ProductResponseDto toProductResponseDto(Product product);
+
+    @Mapping(target = "id", ignore = true)
+    Product toProduct(ProductRequestDto productRequestDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
     void updateEntity(@MappingTarget Product product, ProductRequestDto productDto);
 
-    @IterableMapping(elementTargetType = ProductRequestDto.class)
+    @IterableMapping(elementTargetType = ProductResponseDto.class)
     List<ProductResponseDto> toProductResponseDtoList(Collection<Product> products);
 }
 

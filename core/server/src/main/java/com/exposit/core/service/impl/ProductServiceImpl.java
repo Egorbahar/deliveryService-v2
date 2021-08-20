@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao;
 
-    public Product addProduct(Product product) {
+    public Product saveProduct(Product product) {
 
         return productDao.save(product);
     }
