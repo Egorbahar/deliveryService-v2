@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -26,7 +28,7 @@ public class StoreController {
     @PostMapping
     public void save(@Valid @RequestBody StoreRequestDto storeRequestDto) {
         Store store = storeMapper.toStore(storeRequestDto);
-        storeService.add(store);
+        storeService.save(store);
     }
 
     @GetMapping
@@ -36,19 +38,18 @@ public class StoreController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StoreResponseDto> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<StoreResponseDto> getById(@PathVariable("id") @NotBlank @Positive Long id) {
         StoreResponseDto storeResponseDto = storeMapper.toStoreResponseDto(storeService.findById(id));
         return new ResponseEntity<>(storeResponseDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         storeService.delete(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StoreResponseDto> update(@PathVariable("id") Long id, @Valid @RequestBody StoreRequestDto storeRequestDto) {
+    public ResponseEntity<StoreResponseDto> update(@PathVariable("id") @NotBlank @Positive Long id, @Valid @RequestBody StoreRequestDto storeRequestDto) {
         Store store = storeMapper.toStore(storeRequestDto);
         store.setId(id);
         storeService.update(store);
@@ -58,7 +59,7 @@ public class StoreController {
 
     @PostMapping("{id}/products")
     @ResponseStatus(value = HttpStatus.OK)
-    public void addProductToStore(@PathVariable("id") Long storeId, @Valid @RequestParam Long prodId) {
+    public void addProductToStore(@PathVariable("id") @NotBlank @Positive Long storeId, @Valid @RequestParam Long prodId) {
         Product product = productService.findById(prodId);
         Store store = storeService.findById(storeId);
         store.getProducts().add(product);

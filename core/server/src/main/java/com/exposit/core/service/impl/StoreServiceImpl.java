@@ -15,7 +15,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void add(Store store){
+    public void save(Store store){
         storeDao.save(store);
     }
 

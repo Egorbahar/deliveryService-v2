@@ -31,9 +31,7 @@ public class ProductDaoImpl implements ProductDao {
         ParserFactory parserFactory = new ParserFactory();
         try {
             return parserFactory.getParser().read("product");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (FormatFileException e) {
+        } catch (IOException | FormatFileException e) {
             e.printStackTrace();
         }
         return null;

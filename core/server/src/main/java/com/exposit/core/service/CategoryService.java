@@ -5,7 +5,7 @@ import com.exposit.persistence.entity.Category;
 import java.util.List;
 
 
-public interface CategoryService {
+public interface CategoryService extends DefaultService {
     void save(Category category);
 
     List<Category> getAll();

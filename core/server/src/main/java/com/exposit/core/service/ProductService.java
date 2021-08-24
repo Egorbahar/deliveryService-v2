@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 
-public interface ProductService {
-    Product saveProduct(Product product);
+public interface ProductService extends DefaultService{
+    Product save(Product product);
 
     List<Product> sortByPrice(Long storeId);
 
     void delete(Long id);
 
-    Product updateProduct(Product productUp);
+    Product update(Product product);
 
     List<Product> findByAttributes(Map<Integer, String> attributes);
 
@@ -29,4 +29,5 @@ public interface ProductService {
     void deleteProductByStoreId(Long id);
 
     List<Product> findByCategories(List<Integer> categories);
+
 }

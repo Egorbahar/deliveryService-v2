@@ -5,8 +5,8 @@ import com.exposit.persistence.entity.Store;
 import java.util.List;
 
 
-public interface StoreService {
-    void add(Store store);
+public interface StoreService extends DefaultService{
+    void save(Store store);
 
     void delete(Long id);
 

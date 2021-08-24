@@ -18,8 +18,7 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao;
 
-    public Product saveProduct(Product product) {
-
+    public Product save(Product product) {
         return productDao.save(product);
     }
 
@@ -28,9 +27,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Product productUp) {
-        productDao.update(productUp);
-        return productUp;
+    public Product update(Product product) {
+        productDao.update(product);
+        return product;
     }
 
     @Override
