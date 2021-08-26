@@ -1,4 +1,4 @@
-package com.exposit.core.service.implDB;
+package com.exposit.core.service.impldb;
 
 import com.exposit.core.component.LocalMessageSource;
 import com.exposit.core.service.StoreService;
@@ -18,7 +18,6 @@ public class StoreDatabaseService implements StoreService {
     @Override
     public void save(Store store){
         validate(store.getId() != null, messageSource.getMessage("error.store.notHaveId", new Object[]{}));
-        validate(storeRepository.existsByName(store.getName()), messageSource.getMessage("error.store.name.notUnique", new Object[]{}));
         validate(storeRepository.existsByAddress(store.getAddress()), messageSource.getMessage("error.store.address.notUnique", new Object[]{}));
         storeRepository.save(store);
     }
@@ -31,8 +30,6 @@ public class StoreDatabaseService implements StoreService {
     @Override
     public Store update(Store store){
         findById(store.getId());
-        validate(storeRepository.existsByName(store.getName()), messageSource.getMessage("error.store.name.notUnique", new Object[]{}));
-        validate(storeRepository.existsByAddress(store.getAddress()), messageSource.getMessage("error.store.address.notUnique", new Object[]{}));
         return storeRepository.saveAndFlush(store);
     }
 
@@ -44,5 +41,15 @@ public class StoreDatabaseService implements StoreService {
     @Override
     public Store findById(Long id){
         return storeRepository.findById(id).orElseThrow(()->new RuntimeException(messageSource.getMessage("error.store.notExist", new Object[]{})));
+    }
+    @Override
+    public List<Store> findByProductNameWithMinProductPrice(String productName)
+    {
+        return storeRepository.findStoreByMinPriceOfProductName(productName);
+    }
+    @Override
+    public List<Store>  findAllStoresWhereProductIsInStock(String productName)
+    {
+        return storeRepository.findAllByProductNameAndProductQuantityGreaterThan(productName,0);
     }
 }

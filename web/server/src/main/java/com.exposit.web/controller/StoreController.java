@@ -66,4 +66,15 @@ public class StoreController {
         storeService.update(store);
     }
 
+    @GetMapping("/priceMin")
+    public ResponseEntity<List<StoreResponseDto>> findByProductNameWithMinPrice(@Valid @RequestParam String name) {
+        List<StoreResponseDto> storeResponseDtoList = storeMapper.toStoreResponseDtoList(storeService.findByProductNameWithMinProductPrice(name));
+        return new ResponseEntity<>(storeResponseDtoList, HttpStatus.OK);
+    }
+    @GetMapping("/isInStock")
+    public ResponseEntity<List<StoreResponseDto>> findAllStoresWhereProductIsInStock(@Valid @RequestParam String productName) {
+        List<StoreResponseDto> storeResponseDtoList = storeMapper.toStoreResponseDtoList(storeService.findAllStoresWhereProductIsInStock(productName));
+        return new ResponseEntity<>(storeResponseDtoList, HttpStatus.OK);
+    }
+
 }
