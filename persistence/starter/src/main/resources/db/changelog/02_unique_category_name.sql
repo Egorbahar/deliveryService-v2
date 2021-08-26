@@ -1,0 +1,1 @@
+ALTER TABLE category ADD CONSTRAINT name_key UNIQUE (name)
