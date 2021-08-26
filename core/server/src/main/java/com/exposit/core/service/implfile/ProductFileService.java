@@ -1,4 +1,4 @@
-package com.exposit.core.service.impl;
+package com.exposit.core.service.implfile;
 
 import com.exposit.core.dao.ProductDao;
 import com.exposit.core.service.ProductService;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Transactional
 @AllArgsConstructor
-public class ProductServiceImpl implements ProductService {
+public class ProductFileService implements ProductService {
     private final ProductDao productDao;
 
     public Product save(Product product) {
@@ -69,20 +69,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductByStoreId(Long storeId) {
-        productDao.deleteAllByStoreId(storeId);
+    public List<Product> findProductByCategoryIdWithPriceLessAvg(Long categoryId) {
+        return null;
     }
 
     @Override
-    public List<Product> findByCategories(List<Integer> categories) {
-//        return productDao.getAll().stream()
-//                         .filter(product -> product.getCategories()
-//                                                   .stream()
-//                                                   .map(Category::getCategoryItem)
-//                                                   .map(CategoryItem::getIndex)
-//                                                   .collect(Collectors.toList())
-//                                                   .containsAll(categories))
-//                         .collect(Collectors.toList());
+    public List<Product> findProductInStock(boolean param) {
         return null;
     }
 

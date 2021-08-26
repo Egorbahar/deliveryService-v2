@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class Product {
     private String name;
     @Column(name = "quantity")
     @NotNull(message = "product.quantity.notNull")
-    @Positive(message = "{product.quantity.positive}")
+    @PositiveOrZero(message = "{product.quantity.positiveOrZero}")
     private Integer quantity;
     @Column(name = "price")
     @NotNull(message = "product.price.notNull")

@@ -1,4 +1,4 @@
-package com.exposit.core.service.impl;
+package com.exposit.core.service.implfile;
 
 import com.exposit.core.dao.StoreDao;
 import com.exposit.core.service.StoreService;
@@ -7,10 +7,10 @@ import com.exposit.persistence.entity.Store;
 import java.util.List;
 
 
-public class StoreServiceImpl implements StoreService {
+public class StoreFileService implements StoreService {
     private final StoreDao storeDao;
 
-    public StoreServiceImpl(StoreDao storeDao) {
+    public StoreFileService(StoreDao storeDao) {
         this.storeDao = storeDao;
     }
 
@@ -37,4 +37,15 @@ public class StoreServiceImpl implements StoreService {
     public Store findById(Long id){
         return storeDao.getById(id);
     }
+
+    @Override
+    public List<Store> findByProductNameWithMinProductPrice(String productName) {
+        return null;
+    }
+
+    @Override
+    public List<Store> findAllStoresWhereProductIsInStock(String productName) {
+        return null;
+    }
+
 }

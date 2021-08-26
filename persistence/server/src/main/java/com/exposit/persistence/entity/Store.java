@@ -25,7 +25,6 @@ public class Store {
     private String name;
     @Column (name = "address")
     @NotNull(message = "store.address.notNull")
-    @Size(min = 3, max = 50, message = "{store.address.size}")
     private String address;
     @ManyToMany
     @JoinTable(name="product_store",

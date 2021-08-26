@@ -10,12 +10,12 @@ import com.exposit.core.dao.impl.StoreDaoImpl;
 import com.exposit.core.service.CategoryService;
 import com.exposit.core.service.ProductService;
 import com.exposit.core.service.StoreService;
-import com.exposit.core.service.impl.CategoryServiceImpl;
-import com.exposit.core.service.impl.ProductServiceImpl;
-import com.exposit.core.service.impl.StoreServiceImpl;
-import com.exposit.core.service.implDB.CategoryDatabaseService;
-import com.exposit.core.service.implDB.ProductDatabaseService;
-import com.exposit.core.service.implDB.StoreDatabaseService;
+import com.exposit.core.service.impldb.CategoryDatabaseService;
+import com.exposit.core.service.impldb.ProductDatabaseService;
+import com.exposit.core.service.impldb.StoreDatabaseService;
+import com.exposit.core.service.implfile.CategoryFileService;
+import com.exposit.core.service.implfile.ProductFileService;
+import com.exposit.core.service.implfile.StoreFileService;
 import com.exposit.persistence.repository.CategoryRepository;
 import com.exposit.persistence.repository.ProductRepository;
 import com.exposit.persistence.repository.StoreRepository;
@@ -37,7 +37,7 @@ public class StarterConfig {
         if (environment.getRequiredProperty("datasource.type").equals("JPA")) {
             return new ProductDatabaseService(productRepository, messageSource);
         } else {
-            return new ProductServiceImpl(productDao);
+            return new ProductFileService(productDao);
         }
     }
 
@@ -51,7 +51,7 @@ public class StarterConfig {
         if (environment.getRequiredProperty("datasource.type").equals("JPA")) {
             return new CategoryDatabaseService(categoryRepository, messageSource);
         } else {
-            return new CategoryServiceImpl(categoryDao);
+            return new CategoryFileService(categoryDao);
         }
     }
 
@@ -65,7 +65,7 @@ public class StarterConfig {
         if (environment.getRequiredProperty("datasource.type").equals("JPA")) {
             return new StoreDatabaseService(storeRepository, messageSource);
         } else {
-            return new StoreServiceImpl(storeDao);
+            return new StoreFileService(storeDao);
         }
     }
 

@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrorResponseDto {
-
     private HttpStatus httpStatus;
     private String message;
 }
