@@ -1,4 +1,4 @@
-package com.exposit.core.service.implDB;
+package com.exposit.core.service.impldb;
 
 import com.exposit.core.component.LocalMessageSource;
 import com.exposit.core.service.CategoryService;
@@ -30,7 +30,11 @@ public class CategoryDatabaseService implements CategoryService {
 
     @Override
     public Category findById(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException(messageSource.getMessage("error.category.notExist", new Object[]{})));
+        Category category = new Category();
+        if (id != null) {
+            category = categoryRepository.findById(id).orElseThrow(() -> new RuntimeException(messageSource.getMessage("error.category.notExist", new Object[]{})));
+        }
+        return category;
     }
 
     @Override
@@ -43,5 +47,14 @@ public class CategoryDatabaseService implements CategoryService {
         findById(category.getId());
         validate(categoryRepository.existsByName(category.getName()), messageSource.getMessage("error.category.name.notUnique", new Object[]{}));
         return categoryRepository.saveAndFlush(category);
+    }
+
+    @Override
+    public List<Category> findCategoriesByParentId(Long id) {
+        return categoryRepository.findCategoriesByParentId(id);
+    }
+    @Override
+    public Integer findCountProductByCategoryName(String categoryName) {
+        return categoryRepository.countProductsByCategoryName(categoryName);
     }
 }

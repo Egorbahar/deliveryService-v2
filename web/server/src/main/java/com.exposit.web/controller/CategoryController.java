@@ -3,6 +3,7 @@ package com.exposit.web.controller;
 import com.exposit.core.service.CategoryService;
 import com.exposit.persistence.entity.Category;
 import com.exposit.web.dto.request.CategoryRequestDto;
+import com.exposit.web.dto.response.CategoryProductCountResponseDto;
 import com.exposit.web.dto.response.CategoryResponseDto;
 import com.exposit.web.mapper.CategoryMapper;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,14 @@ public class CategoryController {
 
     @PostMapping
     public void save(@Valid @RequestBody CategoryRequestDto categoryRequestDto) {
-        Category category = categoryMapper.toCategory(categoryRequestDto);
+        Category category = new Category();
+        if (categoryRequestDto.getParent_category_id() == null) {
+            category.setName(categoryRequestDto.getName());
+        } else {
+            category = categoryMapper.toCategory(categoryRequestDto);
+            Category parentCategory = categoryService.findById(categoryRequestDto.getParent_category_id());
+            category.setParent(parentCategory);
+        }
         categoryService.save(category);
     }
 
@@ -52,5 +60,20 @@ public class CategoryController {
         categoryService.update(category);
         CategoryResponseDto categoryResponseDto = categoryMapper.toCategoryResponseDto(category);
         return new ResponseEntity<>(categoryResponseDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/subcategories")
+    public ResponseEntity<List<CategoryResponseDto>> getCategoriesByParentId(@PathVariable("id") @NotBlank @Positive Long id) {
+        List<CategoryResponseDto> categoryResponseDtoList = categoryMapper.toCategoryResponseDtoList(categoryService.findCategoriesByParentId(id));
+        return new ResponseEntity<>(categoryResponseDtoList, HttpStatus.OK);
+    }
+    @GetMapping("/countProducts")
+    public ResponseEntity<CategoryProductCountResponseDto> getCountProductsByCategoryName(@Valid @RequestParam String categoryName)
+    {
+        Integer countProducts = categoryService.findCountProductByCategoryName(categoryName);
+        CategoryProductCountResponseDto categoryProductCountResponseDto = new CategoryProductCountResponseDto();
+        categoryProductCountResponseDto.setCountProduct(countProducts);
+        categoryProductCountResponseDto.setCategoryName(categoryName);
+        return new ResponseEntity<>(categoryProductCountResponseDto, HttpStatus.OK);
     }
 }

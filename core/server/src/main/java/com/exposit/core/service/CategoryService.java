@@ -15,4 +15,8 @@ public interface CategoryService extends DefaultService {
     void delete(Long id);
 
     Category update(Category category);
+
+    List<Category> findCategoriesByParentId(Long id);
+
+    Integer findCountProductByCategoryName(String categoryName);
 }
