@@ -1,12 +1,10 @@
-package com.exposit.core.service.implDB;
+package com.exposit.core.service.impldb;
 
 import com.exposit.core.component.LocalMessageSource;
 import com.exposit.core.service.ProductService;
-import com.exposit.persistence.entity.Category;
 import com.exposit.persistence.entity.Product;
 import com.exposit.persistence.repository.ProductRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
@@ -16,14 +14,13 @@ import java.util.stream.Collectors;
 
 @Transactional
 @AllArgsConstructor
-@PropertySource("starter/src/resources/exception.properties")
 public class ProductDatabaseService implements ProductService {
     private final ProductRepository productRepository;
     private final LocalMessageSource messageSource;
+
     @Override
     public Product save(Product product) {
-        validate(product.getId() != null, messageSource.getMessage("error.store.notHaveId", new Object[]{}));
-        validate(productRepository.existsByName(product.getName()), messageSource.getMessage("error.product.name.notUnique", new Object[]{}));
+        validate(product.getId() != null, messageSource.getMessage("error.product.notHaveId", new Object[]{}));
         return productRepository.save(product);
     }
 
@@ -52,11 +49,6 @@ public class ProductDatabaseService implements ProductService {
     }
 
     @Override
-    public List<Product> findByCategory(Category category) {
-        return null;
-    }
-
-    @Override
     public List<Product> getAll() {
         return productRepository.findAll();
     }
@@ -71,14 +63,18 @@ public class ProductDatabaseService implements ProductService {
         return productRepository.findById(id).orElseThrow(() -> new RuntimeException(messageSource.getMessage("error.product.notExist", new Object[]{})));
     }
 
-    @Override
-    public void deleteProductByStoreId(Long id) {
 
+    public List<Product> findProductByCategoryIdWithPriceLessAvg(Long categoryId) {
+        return productRepository.findProductsByCategoryAndAvrPrice(categoryId);
     }
 
+    @Override
+    public List<Product> findProductInStock(boolean isInStock) {
+        return isInStock ? productRepository.findProductsByQuantityGreaterThan(0) : productRepository.findProductsByQuantity(0);
+    }
 
     @Override
-    public List<Product> findByCategories(List<Integer> categories) {
-        return null;
+    public List<Product> findProductsByCategoryId(Long categoryId) {
+        return productRepository.findProductsByCategoryId(categoryId);
     }
 }

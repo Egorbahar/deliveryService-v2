@@ -1,13 +1,12 @@
 package com.exposit.core.service;
 
-import com.exposit.persistence.entity.Category;
 import com.exposit.persistence.entity.Product;
 
 import java.util.List;
 import java.util.Map;
 
 
-public interface ProductService extends DefaultService{
+public interface ProductService extends DefaultService {
     Product save(Product product);
 
     List<Product> sortByPrice(Long storeId);
@@ -18,7 +17,7 @@ public interface ProductService extends DefaultService{
 
     List<Product> findByAttributes(Map<Integer, String> attributes);
 
-    List<Product> findByCategory(Category category);
+    List<Product> findProductsByCategoryId(Long categoryId);
 
     List<Product> getAll();
 
@@ -26,8 +25,7 @@ public interface ProductService extends DefaultService{
 
     Product findById(Long id);
 
-    void deleteProductByStoreId(Long id);
+    List<Product> findProductByCategoryIdWithPriceLessAvg(Long categoryId);
 
-    List<Product> findByCategories(List<Integer> categories);
-
+    List<Product> findProductInStock(boolean param);
 }

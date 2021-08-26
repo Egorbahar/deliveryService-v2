@@ -63,5 +63,21 @@ public class ProductController {
         ProductResponseDto productResponseDto = productMapper.toProductResponseDto(product);
         return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }
-
+    @GetMapping("/categories/{id}/lessAvgPrice")
+    public ResponseEntity<List<ProductResponseDto>> findProductByCategoryWithPriceLessAvr(@PathVariable("id") @NotBlank @Positive Long categoryId)
+    {
+        List<ProductResponseDto> productResponseDto = productMapper.toProductResponseDtoList(productService.findProductByCategoryIdWithPriceLessAvg(categoryId));
+        return new ResponseEntity<>(productResponseDto,HttpStatus.OK);
+    }
+    @GetMapping("/inStock")
+    public ResponseEntity<List<ProductResponseDto>> findByProductInStock(@Valid @RequestParam boolean isInStock) {
+        List<ProductResponseDto> productResponseDtoList = productMapper.toProductResponseDtoList(productService.findProductInStock(isInStock));
+        return new ResponseEntity<>(productResponseDtoList, HttpStatus.OK);
+    }
+    @GetMapping("/categories/{id}")
+    public ResponseEntity<List<ProductResponseDto>> findProductByCategoryId(@PathVariable("id") @NotBlank @Positive Long categoryId)
+    {
+        List<ProductResponseDto> productResponseDto = productMapper.toProductResponseDtoList(productService.findProductsByCategoryId(categoryId));
+        return new ResponseEntity<>(productResponseDto,HttpStatus.OK);
+    }
 }
