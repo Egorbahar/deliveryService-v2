@@ -4,6 +4,7 @@ import com.exposit.core.service.ProductService;
 import com.exposit.core.service.StoreService;
 import com.exposit.persistence.entity.Product;
 import com.exposit.persistence.entity.Store;
+import com.exposit.web.annotation.LogExecutionTime;
 import com.exposit.web.dto.request.StoreRequestDto;
 import com.exposit.web.dto.response.StoreResponseDto;
 import com.exposit.web.mapper.StoreMapper;
@@ -26,29 +27,34 @@ public class StoreController {
     private final ProductService productService;
 
     @PostMapping
+    @LogExecutionTime
     public void save(@Valid @RequestBody StoreRequestDto storeRequestDto) {
         Store store = storeMapper.toStore(storeRequestDto);
         storeService.save(store);
     }
 
     @GetMapping
+    @LogExecutionTime
     public ResponseEntity<List<StoreResponseDto>> getAll() {
         List<StoreResponseDto> storeResponseDtoList = storeMapper.toStoreResponseDtoList(storeService.getAll());
         return new ResponseEntity<>(storeResponseDtoList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @LogExecutionTime
     public ResponseEntity<StoreResponseDto> getById(@PathVariable("id") @NotBlank @Positive Long id) {
         StoreResponseDto storeResponseDto = storeMapper.toStoreResponseDto(storeService.findById(id));
         return new ResponseEntity<>(storeResponseDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
+    @LogExecutionTime
     public void delete(@PathVariable("id") Long id) {
         storeService.delete(id);
     }
 
     @PutMapping("/{id}")
+    @LogExecutionTime
     public ResponseEntity<StoreResponseDto> update(@PathVariable("id") @NotBlank @Positive Long id, @Valid @RequestBody StoreRequestDto storeRequestDto) {
         Store store = storeMapper.toStore(storeRequestDto);
         store.setId(id);
@@ -59,6 +65,7 @@ public class StoreController {
 
     @PostMapping("{id}/products")
     @ResponseStatus(value = HttpStatus.OK)
+    @LogExecutionTime
     public void addProductToStore(@PathVariable("id") @NotBlank @Positive Long storeId, @Valid @RequestParam Long prodId) {
         Product product = productService.findById(prodId);
         Store store = storeService.findById(storeId);
@@ -67,14 +74,21 @@ public class StoreController {
     }
 
     @GetMapping("/priceMin")
+    @LogExecutionTime
     public ResponseEntity<List<StoreResponseDto>> findByProductNameWithMinPrice(@Valid @RequestParam String name) {
         List<StoreResponseDto> storeResponseDtoList = storeMapper.toStoreResponseDtoList(storeService.findByProductNameWithMinProductPrice(name));
         return new ResponseEntity<>(storeResponseDtoList, HttpStatus.OK);
     }
     @GetMapping("/isInStock")
+    @LogExecutionTime
     public ResponseEntity<List<StoreResponseDto>> findAllStoresWhereProductIsInStock(@Valid @RequestParam String productName) {
         List<StoreResponseDto> storeResponseDtoList = storeMapper.toStoreResponseDtoList(storeService.findAllStoresWhereProductIsInStock(productName));
         return new ResponseEntity<>(storeResponseDtoList, HttpStatus.OK);
     }
-
+    @GetMapping("/filter")
+    @LogExecutionTime
+    public ResponseEntity<List<StoreResponseDto>> getAllByNameOrAddress(@Valid @RequestParam String name, @Valid @RequestParam String address) {
+        List<StoreResponseDto> storeResponseDtoList = storeMapper.toStoreResponseDtoList(storeService.filterByNameOrAddress(name,address));
+        return new ResponseEntity<>(storeResponseDtoList, HttpStatus.OK);
+    }
 }
