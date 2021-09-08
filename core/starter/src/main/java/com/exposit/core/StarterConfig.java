@@ -1,5 +1,6 @@
 package com.exposit.core;
 
+import com.exposit.core.aspect.ValidationAspect;
 import com.exposit.core.component.LocalMessageSource;
 import com.exposit.core.dao.CategoryDao;
 import com.exposit.core.dao.ProductDao;
@@ -23,12 +24,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 
 @Configuration
+@EnableAspectJAutoProxy
 @AllArgsConstructor
-public class StarterConfig {
+public class  StarterConfig {
     private final Environment environment;
 
 
@@ -78,11 +81,17 @@ public class StarterConfig {
     public LocalMessageSource localMessageSource(MessageSource messageSource) {
         return new LocalMessageSource(messageSource);
     }
+
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("applicationMessages");
         return messageSource;
+    }
+
+    @Bean
+    public ValidationAspect validationAspect(LocalMessageSource messageSource, StoreRepository storeRepository) {
+        return new ValidationAspect(messageSource, storeRepository);
     }
 }
 
