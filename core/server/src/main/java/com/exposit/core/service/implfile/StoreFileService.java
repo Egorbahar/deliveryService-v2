@@ -15,26 +15,26 @@ public class StoreFileService implements StoreService {
     }
 
     @Override
-    public void save(Store store){
+    public void save(Store store) {
         storeDao.save(store);
     }
 
     @Override
-    public void delete(Long id){
+    public void delete(Long id) {
         storeDao.delete(id);
     }
 
     @Override
-    public Store update(Store store){
+    public Store update(Store store) {
         return storeDao.update(store);
     }
 
-    public List<Store> getAll(){
+    public List<Store> getAll() {
         return storeDao.getAll();
     }
 
     @Override
-    public Store findById(Long id){
+    public Store findById(Long id) {
         return storeDao.getById(id);
     }
 
@@ -47,5 +47,11 @@ public class StoreFileService implements StoreService {
     public List<Store> findAllStoresWhereProductIsInStock(String productName) {
         return null;
     }
+
+    @Override
+    public List<Store> filterByNameOrAddress(String name, String address) {
+        return null;
+    }
+
 
 }

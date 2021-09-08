@@ -19,4 +19,6 @@ public interface StoreService extends DefaultService{
     List<Store> findByProductNameWithMinProductPrice(String productName);
 
     List<Store>  findAllStoresWhereProductIsInStock(String productName);
+
+    List<Store> filterByNameOrAddress(String name, String address);
 }

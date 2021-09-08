@@ -2,7 +2,6 @@ package com.exposit.core.service.implfile;
 
 import com.exposit.core.dao.ProductDao;
 import com.exposit.core.service.ProductService;
-import com.exposit.persistence.entity.Category;
 import com.exposit.persistence.entity.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,17 +40,15 @@ public class ProductFileService implements ProductService {
                          .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Product> findProductsByCategoryId(Long categoryId) {
+        return null;
+    }
+
     private Predicate<Product> filterIfContainsAttribute(Map<Integer, String> attributes, Integer attributeIndex, Function<Product, String> f) {
         return object -> !attributes.containsKey(attributeIndex) || f.apply(object).equals(attributes.get(attributeIndex));
     }
 
-    @Override
-    public List<Product> findByCategory(Category category) {
-//        return productDao.getAll().stream()
-//                         .filter(product -> product.getCategories().contains(category))
-//                         .collect(Collectors.toList());
-        return null;
-    }
 
     @Override
     public List<Product> getAll() {

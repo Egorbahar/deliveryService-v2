@@ -52,4 +52,9 @@ public class StoreDatabaseService implements StoreService {
     {
         return storeRepository.findAllByProductNameAndProductQuantityGreaterThan(productName,0);
     }
+
+    @Override
+    public List<Store> filterByNameOrAddress(String name, String address) {
+        return storeRepository.findAll(Specification.where((storeByName(name))).or(storeByAddress(address)));
+    }
 }
