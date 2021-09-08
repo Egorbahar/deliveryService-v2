@@ -1,4 +1,4 @@
-package com.exposit.core.service.impl;
+package com.exposit.core.service.implfile;
 
 import com.exposit.core.dao.CategoryDao;
 import com.exposit.core.service.CategoryService;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional
 @AllArgsConstructor
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryFileService implements CategoryService {
     private final CategoryDao categoryDao;
 
     @Override
@@ -37,5 +37,15 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category update(Category category) {
         return categoryDao.update(category);
+    }
+
+    @Override
+    public List<Category> findCategoriesByParentId(Long id) {
+        return null;
+    }
+
+    @Override
+    public Integer findCountProductByCategoryName(String categoryName) {
+        return null;
     }
 }

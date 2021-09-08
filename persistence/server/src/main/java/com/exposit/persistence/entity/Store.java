@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -18,8 +20,11 @@ public class Store {
     @Column(name = "id")
     private Long id;
     @Column (name = "name")
+    @NotNull(message = "store.name.notNull")
+    @Size(min = 3, max = 50, message = "{store.name.size}")
     private String name;
     @Column (name = "address")
+    @NotNull(message = "store.address.notNull")
     private String address;
     @ManyToMany
     @JoinTable(name="product_store",

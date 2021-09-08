@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -18,6 +20,8 @@ public class Category {
     @Column(name = "id")
     private Long id;
     @Column (name = "Name")
+    @NotNull(message = "category.name.notNull")
+    @Size(min = 3, max = 50, message = "{category.name.size}")
     private String name;
     @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name = "parent_category_id")

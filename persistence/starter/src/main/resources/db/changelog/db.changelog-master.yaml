@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: db/changelog/01_create.sql
+  - include:
+      file: db/changelog/02_unique_category_name.sql

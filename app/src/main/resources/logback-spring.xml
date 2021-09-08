@@ -1,0 +1,40 @@
+<configuration >
+    <springProfile name="dev">
+        <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+            <file>logback.log</file>
+            <encoder>
+                <pattern>%-5relative %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%-5relative %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="chapters.configuration" level="INFO"/>
+        <root level="DEBUG">
+            <appender-ref ref="FILE" />
+        </root>
+        <root level="INFO">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+            <file>${user.home}/database.log</file>
+            <append>false</append>
+            <encoder>
+                <pattern>%-5relative %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="chapters.configuration" level="INFO"/>
+
+        <root level="INFO">
+            <appender-ref ref="FILE" />
+        </root>
+    </springProfile>
+</configuration>

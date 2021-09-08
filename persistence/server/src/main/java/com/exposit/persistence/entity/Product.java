@@ -5,6 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -18,10 +22,16 @@ public class Product {
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
+    @NotNull
+    @Size(min = 3, max = 50, message = "{product.name.size}")
     private String name;
     @Column(name = "quantity")
+    @NotNull(message = "product.quantity.notNull")
+    @PositiveOrZero(message = "{product.quantity.positiveOrZero}")
     private Integer quantity;
     @Column(name = "price")
+    @NotNull(message = "product.price.notNull")
+    @Positive(message = "{product.price.positive}")
     private Double price;
 
     @ManyToMany
