@@ -8,6 +8,7 @@ import com.exposit.web.dto.response.CategoryProductCountResponseDto;
 import com.exposit.web.dto.response.CategoryResponseDto;
 import com.exposit.web.mapper.CategoryMapper;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/categories")
 @AllArgsConstructor
+@Slf4j
 public class CategoryController {
     private final CategoryService categoryService;
     private final CategoryMapper categoryMapper;
@@ -27,6 +29,7 @@ public class CategoryController {
     @PostMapping
     @LogExecutionTime
     public void save(@Valid @RequestBody CategoryRequestDto categoryRequestDto) {
+        log.info("Executing the category save method...");
         Category category = new Category();
         if (categoryRequestDto.getParent_category_id() == null) {
             category.setName(categoryRequestDto.getName());
@@ -41,6 +44,7 @@ public class CategoryController {
     @GetMapping
     @LogExecutionTime
     public ResponseEntity<List<CategoryResponseDto>> getAll() {
+        log.info("Executing the category getAll method...");
         List<CategoryResponseDto> categoryResponseDtoList = categoryMapper.toCategoryResponseDtoList(categoryService.getAll());
         return new ResponseEntity<>(categoryResponseDtoList, HttpStatus.OK);
     }
@@ -48,6 +52,7 @@ public class CategoryController {
     @GetMapping("/{id}")
     @LogExecutionTime
     public ResponseEntity<CategoryResponseDto> getById(@PathVariable("id") @NotBlank @Positive Long id) {
+        log.info("Executing the category getById method...");
         CategoryResponseDto categoryResponseDto = categoryMapper.toCategoryResponseDto(categoryService.findById(id));
         return new ResponseEntity<>(categoryResponseDto, HttpStatus.OK);
     }
@@ -55,12 +60,14 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     @LogExecutionTime
     public void delete(@PathVariable("id") @NotBlank @Positive Long id) {
+        log.info("Executing the category delete method...");
         categoryService.delete(id);
     }
 
     @PutMapping("/{id}")
     @LogExecutionTime
     public ResponseEntity<CategoryResponseDto> update(@PathVariable("id") @NotBlank @Positive Long id, @Valid @RequestBody CategoryRequestDto categoryRequestDto) {
+        log.info("Executing the category update method...");
         Category category = categoryMapper.toCategory(categoryRequestDto);
         category.setId(id);
         categoryService.update(category);
@@ -71,13 +78,15 @@ public class CategoryController {
     @GetMapping("/{id}/subcategories")
     @LogExecutionTime
     public ResponseEntity<List<CategoryResponseDto>> getCategoriesByParentId(@PathVariable("id") @NotBlank @Positive Long id) {
+        log.info("Executing the category  getCategoriesByParentId method...");
         List<CategoryResponseDto> categoryResponseDtoList = categoryMapper.toCategoryResponseDtoList(categoryService.findCategoriesByParentId(id));
         return new ResponseEntity<>(categoryResponseDtoList, HttpStatus.OK);
     }
+
     @GetMapping("/countProducts")
     @LogExecutionTime
-    public ResponseEntity<CategoryProductCountResponseDto> getCountProductsByCategoryName(@Valid @RequestParam String categoryName)
-    {
+    public ResponseEntity<CategoryProductCountResponseDto> getCountProductsByCategoryName(@Valid @RequestParam String categoryName) {
+        log.info("Executing the category getCountProductsByCategoryName method...");
         Integer countProducts = categoryService.findCountProductByCategoryName(categoryName);
         CategoryProductCountResponseDto categoryProductCountResponseDto = new CategoryProductCountResponseDto();
         categoryProductCountResponseDto.setCountProduct(countProducts);

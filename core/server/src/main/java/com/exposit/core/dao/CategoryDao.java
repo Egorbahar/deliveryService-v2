@@ -14,4 +14,8 @@ public interface CategoryDao {
     void delete(Long id);
 
     Category update(Category category);
+
+    List<Category> findCategoryByParentId(Long id);
+
+    Integer findCountProductByCategoryName(String categoryName);
 }

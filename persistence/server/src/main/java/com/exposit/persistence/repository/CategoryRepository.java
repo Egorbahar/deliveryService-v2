@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CategoryRepository extends JpaRepository<Category,Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
     boolean existsByName(String name);
 
     @Query("SELECT category FROM Category category WHERE category.parent.id = :id")

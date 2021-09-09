@@ -2,14 +2,12 @@ package com.exposit.core.service.implfile;
 
 import com.exposit.core.dao.ProductDao;
 import com.exposit.core.service.ProductService;
+import com.exposit.persistence.entity.Category;
 import com.exposit.persistence.entity.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -32,32 +30,19 @@ public class ProductFileService implements ProductService {
     }
 
     @Override
-    public List<Product> findByAttributes(Map<Integer, String> attributes) {
-        return productDao.getAll()
-                         .stream()
-                         .filter(p -> filterIfContainsAttribute(attributes, 1, Product::getName).test(p))
-                         .filter(p -> filterIfContainsAttribute(attributes, 2, Product::valueOfPrice).test(p))
-                         .collect(Collectors.toList());
-    }
-
-    @Override
     public List<Product> findProductsByCategoryId(Long categoryId) {
-        return null;
-    }
-
-    private Predicate<Product> filterIfContainsAttribute(Map<Integer, String> attributes, Integer attributeIndex, Function<Product, String> f) {
-        return object -> !attributes.containsKey(attributeIndex) || f.apply(object).equals(attributes.get(attributeIndex));
+       Category category = productDao.getAll().stream()
+                                     .flatMap(master -> master.getCategories().stream()
+                                           .filter(order -> order.getId().equals(categoryId)))
+                                     .findFirst()
+                                     .get();
+       return category.getProducts();
     }
 
 
     @Override
     public List<Product> getAll() {
         return productDao.getAll();
-    }
-
-    @Override
-    public List<Product> getAllByStoreId(Long storeId) {
-        return productDao.getAllByStoreId(storeId);
     }
 
     @Override
@@ -72,14 +57,9 @@ public class ProductFileService implements ProductService {
 
     @Override
     public List<Product> findProductInStock(boolean param) {
-        return null;
+        return productDao.getAll().stream()
+                .filter(p->p.getPrice()>0)
+                .collect(Collectors.toList());
     }
 
-    public List<Product> sortByPrice(Long storeId) {
-//        return productDao.getAll().stream()
-//                         .filter(product -> product.getStore().getId().equals(storeId))
-//                         .sorted(Comparator.comparing(Product::getPrice))
-//                         .collect(Collectors.toList());
-        return null;
-    }
 }

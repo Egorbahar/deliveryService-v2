@@ -15,7 +15,7 @@ public class CategoryFileService implements CategoryService {
     private final CategoryDao categoryDao;
 
     @Override
-    public void save(Category category){
+    public void save(Category category) {
         categoryDao.save(category);
     }
 
@@ -41,11 +41,11 @@ public class CategoryFileService implements CategoryService {
 
     @Override
     public List<Category> findCategoriesByParentId(Long id) {
-        return null;
+        return categoryDao.findCategoryByParentId(id);
     }
 
     @Override
     public Integer findCountProductByCategoryName(String categoryName) {
-        return null;
+        return categoryDao.findCountProductByCategoryName(categoryName);
     }
 }

@@ -13,13 +13,13 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                        .title("Delivery")
-                        .version("1.0.0")
-                        .contact(
-                                new Contact()
-                                .email("egorbahar@gmail.com")
-                                .name("Bakhar Yahor")
-                        )
+                                .title("Delivery")
+                                .version("1.0.0")
+                                .contact(
+                                        new Contact()
+                                                .email("egorbahar@gmail.com")
+                                                .name("Bakhar Yahor")
+                                )
                 );
     }
 }
