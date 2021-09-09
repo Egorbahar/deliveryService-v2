@@ -16,9 +16,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "AND product.price < (SELECT AVG(product.price) FROM product)")
     List<Product> findProductsByCategoryAndAvrPrice(@Param("categoryId") Long categoryId);
 
-    List<Product> findProductsByQuantityGreaterThan(long quantity);
+    List<Product> findProductsByQuantityGreaterThan(int quantity);
 
-    List<Product> findProductsByQuantity(long quantity);
+    List<Product> findProductsByQuantity(int quantity);
 
     @Query("SELECT product FROM Product product  JOIN product.categories category WHERE category.id = :categoryId")
     List<Product> findProductsByCategoryId(@Param("categoryId") Long categoryId);

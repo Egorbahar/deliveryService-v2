@@ -12,7 +12,7 @@ public interface StoreService extends DefaultService{
 
     Store update(Store store);
 
-    List<Store> getAll();
+    List<Store> findAll();
 
     Store findById(Long id);
 

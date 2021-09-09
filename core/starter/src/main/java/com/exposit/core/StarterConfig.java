@@ -31,7 +31,7 @@ import org.springframework.core.env.Environment;
 @Configuration
 @EnableAspectJAutoProxy
 @AllArgsConstructor
-public class  StarterConfig {
+public class StarterConfig {
     private final Environment environment;
 
 
@@ -42,6 +42,7 @@ public class  StarterConfig {
         } else {
             return new ProductFileService(productDao);
         }
+
     }
 
     @Bean

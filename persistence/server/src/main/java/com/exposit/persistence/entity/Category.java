@@ -19,11 +19,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column (name = "Name")
+    @Column(name = "Name")
     @NotNull(message = "category.name.notNull")
     @Size(min = 3, max = 50, message = "{category.name.size}")
     private String name;
-    @ManyToOne(cascade={CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "parent_category_id")
     private Category parent;
     @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)

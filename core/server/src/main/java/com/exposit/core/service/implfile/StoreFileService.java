@@ -5,6 +5,7 @@ import com.exposit.core.service.StoreService;
 import com.exposit.persistence.entity.Store;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class StoreFileService implements StoreService {
@@ -29,7 +30,7 @@ public class StoreFileService implements StoreService {
         return storeDao.update(store);
     }
 
-    public List<Store> getAll() {
+    public List<Store> findAll() {
         return storeDao.getAll();
     }
 
@@ -40,7 +41,7 @@ public class StoreFileService implements StoreService {
 
     @Override
     public List<Store> findByProductNameWithMinProductPrice(String productName) {
-        return null;
+        return storeDao.getAll();
     }
 
     @Override
@@ -50,8 +51,9 @@ public class StoreFileService implements StoreService {
 
     @Override
     public List<Store> filterByNameOrAddress(String name, String address) {
-        return null;
+        return storeDao.getAll().stream()
+                .filter(s->s.getName().equals(name)||s.getAddress().equals(address))
+                .collect(Collectors.toList());
     }
-
 
 }

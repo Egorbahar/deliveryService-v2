@@ -13,9 +13,5 @@ public interface ProductDao {
 
     void delete(Long id);
 
-    void deleteAllByStoreId(Long id);
-
     Product update(Product productUp);
-
-    List<Product> getAllByStoreId(Long storeId);
 }

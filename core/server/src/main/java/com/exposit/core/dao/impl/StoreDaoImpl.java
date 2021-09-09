@@ -10,7 +10,7 @@ import java.util.List;
 
 public class StoreDaoImpl implements StoreDao {
 
-    public void save(Store store){
+    public void save(Store store) {
         if (store.getId() == null) {
             store.setId((long) (Math.random() * 100));
         }
@@ -19,14 +19,14 @@ public class StoreDaoImpl implements StoreDao {
         writeFile(stores);
     }
 
-    public Store getById(Long id){
+    public Store getById(Long id) {
         return getAll().stream()
                        .filter(s -> s.getId().equals(id))
                        .findFirst()
                        .orElseThrow(() -> new IllegalArgumentException("The store was not found with the store id:" + id));
     }
 
-    public List<Store> getAll(){
+    public List<Store> getAll() {
         ParserFactory parserFactory = new ParserFactory();
         try {
             return parserFactory.getParser().read("store");
@@ -36,7 +36,7 @@ public class StoreDaoImpl implements StoreDao {
         return null;
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         List<Store> stores = getAll();
         Store deleteStore = stores.stream()
                                   .filter(s -> s.getId().equals(id))
@@ -46,7 +46,7 @@ public class StoreDaoImpl implements StoreDao {
         writeFile(stores);
     }
 
-    public Store update(Store storeUp){
+    public Store update(Store storeUp) {
         Store store = getById(storeUp.getId());
         List<Store> updateList = getAll();
         updateList.set(updateList.indexOf(store), storeUp);
@@ -54,7 +54,7 @@ public class StoreDaoImpl implements StoreDao {
         return store;
     }
 
-    public void writeFile(List<Store> list){
+    public void writeFile(List<Store> list) {
         ParserFactory parserFactory = new ParserFactory();
         try {
             parserFactory.getParser().write("store", list);

@@ -23,17 +23,15 @@ public class ValidationAspect {
     public Object addEntityValidate(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object[] methodArgs = proceedingJoinPoint.getArgs();
 
-        if(methodArgs[0] instanceof Store)
-        {
-          Store store = (Store) methodArgs[0];
+        if (methodArgs[0] instanceof Store) {
+            Store store = (Store) methodArgs[0];
             if (store.getId() != null) {
                 throw new RuntimeException(messageSource.getMessage("error.store.notHaveId", new Object[]{}));
             }
-            if(storeRepository.existsByAddress(store.getAddress()))
-            throw new RuntimeException(messageSource.getMessage("error.store.address.notUnique", new Object[]{}));
+            if (storeRepository.existsByAddress(store.getAddress()))
+                throw new RuntimeException(messageSource.getMessage("error.store.address.notUnique", new Object[]{}));
         }
-
+        proceedingJoinPoint.proceed();
         return methodArgs;
     }
-
 }
