@@ -1,0 +1,2 @@
+ALTER TABLE category DROP CONSTRAINT IF EXISTS name_key;
+ALTER TABLE category ADD CONSTRAINT  name_key UNIQUE  (name)
